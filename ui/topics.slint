@@ -1,0 +1,96 @@
+import { Theme } from "theme.slint";
+
+component TopicCard inherits Rectangle {
+    in property <string> title;
+    in property <string> description;
+    in property <bool> featured: false;
+
+    background: Theme.palette.dark-deep-blue;
+    border-radius: 4px;
+    horizontal-stretch: 1;
+
+    // Featured gets gradient overlay
+    if featured : Rectangle {
+        width: 100%; height: 100%;
+        border-radius: 4px;
+        background: Theme.palette.teal-gradient;
+    }
+
+    HorizontalLayout {
+        padding: Theme.spaces.medium;
+        spacing: Theme.spaces.medium;
+
+        // Accent bar
+        Rectangle {
+            width: 2px;
+            background: featured ? Theme.palette.teal : Theme.palette.violet;
+            border-radius: 1px;
+            horizontal-stretch: 0;
+        }
+
+        VerticalLayout {
+            horizontal-stretch: 1;
+            spacing: 4px;
+
+            Text {
+                text: title;
+                color: featured ? Theme.palette.teal : Theme.palette.white;
+                font-size: featured ? Theme.typo.description.size : Theme.typo.label.size;
+                font-weight: featured ? 600 : Theme.typo.label.weight;
+                wrap: word-wrap;
+            }
+            Text {
+                text: description;
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.label-light.size;
+                font-weight: Theme.typo.label-light.weight;
+                wrap: word-wrap;
+            }
+        }
+    }
+}
+
+export component TopicsPanel inherits VerticalLayout {
+    padding: Theme.spaces.large;
+    spacing: Theme.spaces.medium;
+
+    Text {
+        text: "Call for Papers";
+        color: Theme.palette.white;
+        font-size: Theme.typo.header.size;
+        font-weight: Theme.typo.header.weight;
+    }
+    Text {
+        text: "Special Focus: Virtualization for High-Memory LLM Training";
+        color: Theme.palette.teal;
+        font-size: Theme.typo.label.size;
+        font-weight: Theme.typo.label.weight;
+        letter-spacing: 0.5px;
+    }
+
+    Rectangle { height: Theme.spaces.small; }
+
+    TopicCard {
+        title: "GPU Memory Virtualization for LLM Training";
+        description: "Techniques for virtualizing GPU memory to support large language model training that exceeds physical memory — unified memory, memory pooling, transparent paging.";
+        featured: true;
+    }
+
+    HorizontalLayout {
+        spacing: Theme.spaces.medium;
+        TopicCard { title: "Memory Compression"; description: "Hardware and software compression for HPC and AI workloads in virtualized environments."; }
+        TopicCard { title: "Cloud-Native HPC"; description: "Container orchestration, serverless computing, and microservices for high-performance workloads."; }
+    }
+
+    HorizontalLayout {
+        spacing: Theme.spaces.medium;
+        TopicCard { title: "VM & Container Isolation"; description: "Security and performance isolation for multi-tenant GPU sharing and HPC workloads."; }
+        TopicCard { title: "I/O & Network Virtualization"; description: "SR-IOV, RDMA, and network overlays for distributed training at scale."; }
+    }
+
+    HorizontalLayout {
+        spacing: Theme.spaces.medium;
+        TopicCard { title: "Resource Scheduling"; description: "Scheduling for heterogeneous HPC clouds with GPUs, FPGAs, and accelerators."; }
+        TopicCard { title: "Performance Analysis"; description: "Benchmarking and modeling of virtualized HPC and AI infrastructure."; }
+    }
+}

@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:vhpc.org)",
+      "WebFetch(domain:slint.dev)",
+      "WebSearch",
+      "WebFetch(domain:docs.slint.dev)",
+      "WebFetch(domain:trunk-rs.github.io)",
+      "Bash(cargo check:*)",
+      "Bash(cargo test:*)",
+      "Bash(cargo install:*)",
+      "Bash(wasm-pack build:*)",
+      "WebFetch(domain:releases.slint.dev)",
+      "Bash(gh api:*)",
+      "Bash(gh auth status:*)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(cargo metadata:*)",
+      "Bash(python3:*)",
+      "Bash(wasm-pack:*)",
+      "Bash(cargo tree:*)",
+      "Bash(wasm-bindgen:*)",
+      "Bash(/Users/mike/Library/Caches/.wasm-pack/wasm-bindgen-cargo-install-0.2.112/bin/wasm-bindgen:*)",
+      "Bash(\"/Users/mike/Library/Caches/.wasm-pack/wasm-bindgen-cargo-install-0.2.112/wasm-bindgen\" --version)",
+      "Bash(cargo build:*)",
+      "Bash(rustc:*)",
+      "Bash(wasm2wat:*)",
+      "Bash(md5:*)",
+      "WebFetch(domain:slintpad.com)",
+      "Bash(curl:*)"
+    ]
+  }
+}

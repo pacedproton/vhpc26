@@ -1,0 +1,172 @@
+import { Theme } from "theme.slint";
+
+component DateRow inherits Rectangle {
+    in property <string> label;
+    in property <string> value;
+    in property <bool> has-separator: true;
+
+    background: Theme.palette.dark-deep-blue;
+    min-height: 36px;
+
+    HorizontalLayout {
+        padding-left: Theme.spaces.medium;
+        padding-right: Theme.spaces.medium;
+        padding-top: Theme.spaces.small;
+        padding-bottom: Theme.spaces.small;
+
+        Text {
+            width: 120px;
+            text: label;
+            color: Theme.palette.shark-gray;
+            font-size: Theme.typo.label.size;
+            font-weight: Theme.typo.label.weight;
+            vertical-alignment: center;
+        }
+        Text {
+            text: value;
+            color: Theme.palette.white;
+            font-size: Theme.typo.description.size;
+            font-weight: Theme.typo.description.weight;
+            vertical-alignment: center;
+            horizontal-stretch: 1;
+        }
+    }
+
+    if has-separator : Rectangle {
+        width: parent.width - 2 * Theme.spaces.medium;
+        height: 1px;
+        x: Theme.spaces.medium;
+        y: parent.height - self.height;
+        background: Theme.palette.violet;
+        opacity: 0.15;
+    }
+}
+
+component InfoBlock inherits Rectangle {
+    in property <string> heading;
+
+    background: Theme.palette.dark-deep-blue;
+    border-radius: 4px;
+
+    VerticalLayout {
+        padding: Theme.spaces.medium;
+        spacing: Theme.spaces.medium;
+
+        Text {
+            text: heading;
+            color: Theme.palette.teal;
+            font-size: Theme.typo.header.size;
+            font-weight: Theme.typo.header.weight;
+        }
+
+        @children
+    }
+}
+
+export component SubmissionPanel inherits VerticalLayout {
+    padding: Theme.spaces.large;
+    spacing: Theme.spaces.medium;
+
+    Text {
+        text: "Paper Submission";
+        color: Theme.palette.white;
+        font-size: Theme.typo.header.size;
+        font-weight: Theme.typo.header.weight;
+    }
+
+    // Dates
+    VerticalLayout {
+        spacing: 0px;
+
+        Text {
+            text: "Important Dates";
+            color: Theme.palette.teal;
+            font-size: Theme.typo.label.size;
+            font-weight: Theme.typo.label.weight;
+            letter-spacing: 0.5px;
+        }
+
+        Rectangle { height: Theme.spaces.small; }
+
+        Rectangle {
+            border-radius: 4px;
+            background: Theme.palette.dark-deep-blue;
+            clip: true;
+
+            VerticalLayout {
+                DateRow { label: "Submission"; value: "TBA"; }
+                DateRow { label: "Notification"; value: "TBA"; }
+                DateRow { label: "Camera-Ready"; value: "TBA"; }
+                DateRow { label: "Workshop"; value: "August 2026 (with Euro-Par)"; has-separator: false; }
+            }
+        }
+    }
+
+    // Guidelines
+    InfoBlock {
+        heading: "Submission Guidelines";
+
+        Text {
+            text: "Papers should be formatted in Springer LNCS style and submitted as PDF. Full papers: up to 12 pages. Short / work-in-progress: up to 6 pages.";
+            color: Theme.palette.shark-gray;
+            font-size: Theme.typo.description.size;
+            font-weight: Theme.typo.description.weight;
+            wrap: word-wrap;
+        }
+
+        Rectangle {
+            height: 1px;
+            background: Theme.palette.violet;
+            opacity: 0.15;
+        }
+
+        Text {
+            text: "Submission system: EasyChair (link TBA)";
+            color: Theme.palette.white;
+            font-size: Theme.typo.description.size;
+            font-weight: Theme.typo.description.weight;
+        }
+    }
+
+    // Proceedings — violet accent
+    Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        Rectangle {
+            width: 100%; height: 100%;
+            border-radius: 4px;
+            background: Theme.palette.violet-gradient;
+        }
+
+        HorizontalLayout {
+            padding: Theme.spaces.medium;
+            spacing: Theme.spaces.medium;
+
+            Rectangle {
+                width: 2px;
+                background: Theme.palette.violet;
+                border-radius: 1px;
+                horizontal-stretch: 0;
+            }
+
+            VerticalLayout {
+                spacing: Theme.spaces.small;
+
+                Text {
+                    text: "Proceedings";
+                    color: Theme.palette.violet;
+                    font-size: Theme.typo.header.size;
+                    font-weight: Theme.typo.header.weight;
+                }
+                Text {
+                    text: "Accepted papers will be published in the Euro-Par Workshops proceedings by Springer in the LNCS series.";
+                    color: Theme.palette.shark-gray;
+                    font-size: Theme.typo.description.size;
+                    font-weight: Theme.typo.description.weight;
+                    wrap: word-wrap;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,96 @@
+// VHPC 2026 Dashboard Theme — Energy Monitor style
+
+struct Font {
+    size: length,
+    weight: float,
+}
+
+export struct Typo {
+    label: Font,
+    label-light: Font,
+    header: Font,
+    header-item: Font,
+    header-item-light: Font,
+    value: Font,
+    description: Font,
+    description-light: Font,
+    value-big: Font,
+}
+
+export struct Palette {
+    pure-black: brush,
+    dark-deep-blue: brush,
+    shark-gray: brush,
+    white: brush,
+
+    // accents
+    teal: brush,
+    teal-dim: brush,
+    violet: brush,
+    violet-dim: brush,
+
+    // gradients
+    teal-gradient: brush,
+    violet-gradient: brush,
+    bar-gradient: brush,
+    bar-alt-gradient: brush,
+    background-gradient: brush,
+    sidebar-gradient: brush,
+}
+
+export struct Spaces {
+    small: length,
+    medium: length,
+    large: length,
+}
+
+export struct Durations {
+    fast: duration,
+    medium: duration,
+    slow: duration,
+}
+
+export global Theme {
+    in property <Palette> palette: {
+        pure-black: #000000,
+        dark-deep-blue: #040708,
+        shark-gray: #2C2F36,
+        white: #FFFFFF,
+
+        teal: #00e5c8,
+        teal-dim: #00e5c830,
+        violet: #896FFF,
+        violet-dim: #896FFF30,
+
+        teal-gradient: @linear-gradient(135deg, #00e5c860 0%, #00e5c800 100%),
+        violet-gradient: @linear-gradient(135deg, #896fff60 0%, #896fff00 100%),
+        bar-gradient: @linear-gradient(180deg, #00e5c8 0%, #00e5c800 100%),
+        bar-alt-gradient: @linear-gradient(180deg, #896FFF 0%, #896fff00 100%),
+        background-gradient: @radial-gradient(circle, #00e5c818 50%, #00e5c800 100%),
+        sidebar-gradient: @linear-gradient(180deg, #0a0e18 0%, #060810 100%),
+    };
+
+    in property <Spaces> spaces: {
+        small: 5px,
+        medium: 10px,
+        large: 20px,
+    };
+
+    in property <Durations> durations: {
+        fast: 125ms,
+        medium: 200ms,
+        slow: 500ms,
+    };
+
+    in property <Typo> typo: {
+        label: { size: 12px, weight: 500 },
+        label-light: { size: 12px, weight: 400 },
+        header: { size: 16px, weight: 600 },
+        header-item: { size: 18px, weight: 400 },
+        header-item-light: { size: 18px, weight: 200 },
+        value: { size: 26px, weight: 500 },
+        description: { size: 14px, weight: 400 },
+        description-light: { size: 14px, weight: 200 },
+        value-big: { size: 40px, weight: 200 },
+    };
+}

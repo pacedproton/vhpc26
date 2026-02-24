@@ -1,0 +1,138 @@
+import { Theme } from "theme.slint";
+
+component SidebarItem inherits Rectangle {
+    in property <string> label;
+    in property <bool> active: false;
+    callback clicked();
+
+    height: 36px;
+    background: active ? Theme.palette.teal-dim : touch.has-hover ? #ffffff08 : transparent;
+    border-radius: 4px;
+
+    touch := TouchArea {
+        clicked => { root.clicked(); }
+    }
+
+    HorizontalLayout {
+        padding-left: Theme.spaces.medium;
+        spacing: Theme.spaces.small;
+
+        // Active accent bar
+        Rectangle {
+            width: 2px;
+            background: active ? Theme.palette.teal : transparent;
+            border-radius: 1px;
+
+            animate background { duration: Theme.durations.fast; }
+        }
+
+        Text {
+            text: label;
+            color: active ? Theme.palette.teal : Theme.palette.shark-gray;
+            font-size: Theme.typo.description.size;
+            font-weight: active ? 600 : Theme.typo.description.weight;
+            vertical-alignment: center;
+
+            animate color { duration: Theme.durations.fast; }
+        }
+    }
+}
+
+export component Sidebar inherits Rectangle {
+    in property <int> active-index: 0;
+    callback navigate(int);
+
+    width: 180px;
+    background: Theme.palette.sidebar-gradient;
+
+    // Right edge line
+    Rectangle {
+        x: parent.width - 1px;
+        width: 1px;
+        background: #ffffff08;
+    }
+
+    VerticalLayout {
+        padding: Theme.spaces.large;
+        spacing: 0px;
+
+        // Logo
+        Rectangle {
+            height: 64px;
+
+            VerticalLayout {
+                alignment: center;
+                padding-left: Theme.spaces.medium;
+
+                Text {
+                    text: "VHPC";
+                    color: Theme.palette.teal;
+                    font-size: Theme.typo.value-big.size;
+                    font-weight: Theme.typo.value-big.weight;
+                    letter-spacing: 4px;
+                }
+                Text {
+                    text: "2026";
+                    color: Theme.palette.shark-gray;
+                    font-size: Theme.typo.label.size;
+                    font-weight: Theme.typo.label.weight;
+                    letter-spacing: 6px;
+                }
+            }
+        }
+
+        // Divider
+        Rectangle {
+            height: 1px;
+            background: Theme.palette.violet-dim;
+        }
+
+        Rectangle { height: Theme.spaces.large; }
+
+        SidebarItem {
+            label: "Overview";
+            active: active-index == 0;
+            clicked => { root.navigate(0); }
+        }
+        Rectangle { height: 2px; }
+        SidebarItem {
+            label: "Schedule";
+            active: active-index == 1;
+            clicked => { root.navigate(1); }
+        }
+        Rectangle { height: 2px; }
+        SidebarItem {
+            label: "Topics";
+            active: active-index == 2;
+            clicked => { root.navigate(2); }
+        }
+        Rectangle { height: 2px; }
+        SidebarItem {
+            label: "Committee";
+            active: active-index == 3;
+            clicked => { root.navigate(3); }
+        }
+        Rectangle { height: 2px; }
+        SidebarItem {
+            label: "Submission";
+            active: active-index == 4;
+            clicked => { root.navigate(4); }
+        }
+
+        // Spacer
+        Rectangle { vertical-stretch: 1; }
+
+        Rectangle {
+            height: 1px;
+            background: Theme.palette.violet-dim;
+        }
+        Rectangle { height: Theme.spaces.small; }
+        Text {
+            text: "Euro-Par 2026";
+            color: Theme.palette.shark-gray;
+            font-size: Theme.typo.label-light.size;
+            font-weight: Theme.typo.label-light.weight;
+            horizontal-alignment: center;
+        }
+    }
+}

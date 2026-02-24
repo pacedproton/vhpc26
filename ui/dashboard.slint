@@ -1,0 +1,221 @@
+import { Theme } from "theme.slint";
+
+// Energy Monitor style ValueDisplay — accent bar + gradient bg + title/value/unit
+component ValueCard inherits Rectangle {
+    in property <string> title;
+    in property <string> value;
+    in property <string> unit;
+    in property <bool> alt-colors: false;
+
+    horizontal-stretch: 1;
+    min-height: 70px;
+    border-radius: 4px;
+    background: alt-colors ? Theme.palette.violet-gradient : Theme.palette.teal-gradient;
+
+    HorizontalLayout {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        spacing: 15px;
+
+        // Accent bar
+        Rectangle {
+            width: 2px;
+            background: alt-colors ? Theme.palette.violet : Theme.palette.teal;
+            horizontal-stretch: 0;
+        }
+
+        VerticalLayout {
+            alignment: center;
+            horizontal-stretch: 1;
+
+            Text {
+                text: title;
+                color: alt-colors ? Theme.palette.violet : Theme.palette.teal;
+                font-size: Theme.typo.label.size;
+                font-weight: Theme.typo.label.weight;
+            }
+
+            HorizontalLayout {
+                alignment: start;
+                spacing: 5px;
+
+                Text {
+                    text: value;
+                    color: Theme.palette.white;
+                    font-size: Theme.typo.value.size;
+                    font-weight: Theme.typo.value.weight;
+                    vertical-alignment: center;
+                }
+
+                Text {
+                    text: unit;
+                    color: alt-colors ? Theme.palette.violet : Theme.palette.teal;
+                    font-size: Theme.typo.label-light.size;
+                    font-weight: Theme.typo.label-light.weight;
+                    vertical-alignment: center;
+                }
+            }
+        }
+    }
+}
+
+// Energy Monitor style GroupBox
+component GroupBox inherits VerticalLayout {
+    in property <string> title;
+
+    spacing: Theme.spaces.medium;
+
+    Text {
+        text: title;
+        color: Theme.palette.white;
+        font-size: Theme.typo.header.size;
+        font-weight: Theme.typo.header.weight;
+        horizontal-alignment: left;
+    }
+
+    HorizontalLayout {
+        spacing: Theme.spaces.medium;
+        @children
+    }
+}
+
+// Item with dark bg like Energy Monitor
+component InfoItem inherits Rectangle {
+    in property <bool> has-separator: false;
+
+    background: Theme.palette.dark-deep-blue;
+    border-radius: 4px;
+
+    VerticalLayout {
+        padding: Theme.spaces.medium;
+        spacing: Theme.spaces.medium;
+
+        @children
+    }
+
+    if has-separator : Rectangle {
+        width: parent.width - 2 * Theme.spaces.medium;
+        height: 1px;
+        x: Theme.spaces.medium;
+        y: parent.height - self.height;
+        background: Theme.palette.violet;
+        opacity: 0.25;
+    }
+}
+
+export component DashboardPanel inherits VerticalLayout {
+    padding: Theme.spaces.large;
+    spacing: 12px;
+
+    // Title area
+    VerticalLayout {
+        spacing: 2px;
+
+        Text {
+            text: "Workshop on Virtualization in";
+            color: Theme.palette.shark-gray;
+            font-size: Theme.typo.header-item.size;
+            font-weight: Theme.typo.header-item-light.weight;
+        }
+        Text {
+            text: "High-Performance Cloud Computing";
+            color: Theme.palette.white;
+            font-size: Theme.typo.header-item.size;
+            font-weight: Theme.typo.header-item.weight;
+        }
+        Rectangle { height: 4px; }
+        Text {
+            text: "20th Edition  ·  Co-located with Euro-Par 2026";
+            color: Theme.palette.teal;
+            font-size: Theme.typo.label.size;
+            font-weight: Theme.typo.label.weight;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    // Stats — ValueDisplay style
+    GroupBox {
+        title: "Workshop Stats";
+
+        ValueCard {
+            title: "Edition";
+            value: "20th";
+            unit: "year";
+        }
+        ValueCard {
+            title: "Focus";
+            value: "LLM";
+            unit: "memory";
+            alt-colors: true;
+        }
+        ValueCard {
+            title: "Format";
+            value: "Hybrid";
+            unit: "";
+        }
+    }
+
+    // About — Item style
+    InfoItem {
+        Text {
+            text: "About VHPC";
+            color: Theme.palette.white;
+            font-size: Theme.typo.header.size;
+            font-weight: Theme.typo.header.weight;
+        }
+
+        Text {
+            text: "VHPC brings together researchers and practitioners to discuss virtualization techniques for high-performance cloud computing. This year's 20th edition focuses on virtualization in support of high-memory LLM training workloads, including GPU memory virtualization, memory compression, and cloud-native HPC.";
+            color: Theme.palette.shark-gray;
+            font-size: Theme.typo.description.size;
+            font-weight: Theme.typo.description.weight;
+            wrap: word-wrap;
+        }
+
+        Rectangle {
+            height: 1px;
+            background: Theme.palette.violet;
+            opacity: 0.25;
+        }
+
+        HorizontalLayout {
+            spacing: Theme.spaces.large;
+
+            VerticalLayout {
+                spacing: 2px;
+                horizontal-stretch: 1;
+                Text {
+                    text: "Michael Alexander";
+                    color: Theme.palette.white;
+                    font-size: Theme.typo.description.size;
+                    font-weight: Theme.typo.description.weight;
+                }
+                Text {
+                    text: "Chair · Austrian Academy of Sciences";
+                    color: Theme.palette.teal;
+                    font-size: Theme.typo.label.size;
+                    font-weight: Theme.typo.label.weight;
+                }
+            }
+
+            VerticalLayout {
+                spacing: 2px;
+                horizontal-stretch: 1;
+                Text {
+                    text: "Anastassios Nanos";
+                    color: Theme.palette.white;
+                    font-size: Theme.typo.description.size;
+                    font-weight: Theme.typo.description.weight;
+                }
+                Text {
+                    text: "Co-Chair · Nubificus Ltd.";
+                    color: Theme.palette.teal;
+                    font-size: Theme.typo.label.size;
+                    font-weight: Theme.typo.label.weight;
+                }
+            }
+        }
+    }
+}
