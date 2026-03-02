@@ -14,29 +14,37 @@ export component MainWindow inherits Window {
 
     in-out property <int> active-panel: 0;
 
-    // Background gradient glow like Energy Monitor
     Rectangle {
         width: 100%; height: 100%;
         background: Theme.palette.background-gradient;
-    }
-
-    HorizontalLayout {
-        Sidebar {
-            active-index: active-panel;
-            navigate(idx) => {
-                active-panel = idx;
-            }
+        
+        // Add the dark gradient on the left like Energy Monitor
+        Rectangle {
+            width: 50%;
+            height: 100%;
+            x: 0;
+            background: Theme.palette.dark-left-gradient;
         }
 
-        Flickable {
-            horizontal-stretch: 1;
-            viewport-height: self.height;
+        VerticalLayout {
+            // Re-using the Sidebar file for now but renaming it structurally to act as the Header
+            Sidebar {
+                active-index: active-panel;
+                navigate(idx) => {
+                    active-panel = idx;
+                }
+            }
 
-            if active-panel == 0 : DashboardPanel {}
-            if active-panel == 1 : SchedulePanel {}
-            if active-panel == 2 : TopicsPanel {}
-            if active-panel == 3 : SpeakersPanel {}
-            if active-panel == 4 : SubmissionPanel {}
+            Flickable {
+                vertical-stretch: 1;
+                viewport-height: self.height;
+
+                if active-panel == 0 : DashboardPanel {}
+                if active-panel == 1 : SchedulePanel {}
+                if active-panel == 2 : TopicsPanel {}
+                if active-panel == 3 : SpeakersPanel {}
+                if active-panel == 4 : SubmissionPanel {}
+            }
         }
     }
 }

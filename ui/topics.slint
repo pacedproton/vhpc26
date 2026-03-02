@@ -13,7 +13,7 @@ component TopicCard inherits Rectangle {
     if featured : Rectangle {
         width: 100%; height: 100%;
         border-radius: 4px;
-        background: Theme.palette.teal-gradient;
+        background: Theme.palette.lemon-green-gradient;
     }
 
     HorizontalLayout {
@@ -22,8 +22,8 @@ component TopicCard inherits Rectangle {
 
         // Accent bar
         Rectangle {
-            width: 2px;
-            background: featured ? Theme.palette.teal : Theme.palette.violet;
+            width: 3px;
+            background: featured ? Theme.palette.lemon-green : Theme.palette.slint-blue;
             border-radius: 1px;
             horizontal-stretch: 0;
         }
@@ -34,7 +34,7 @@ component TopicCard inherits Rectangle {
 
             Text {
                 text: title;
-                color: featured ? Theme.palette.teal : Theme.palette.white;
+                color: featured ? Theme.palette.lemon-green : Theme.palette.white;
                 font-size: featured ? Theme.typo.description.size : Theme.typo.label.size;
                 font-weight: featured ? 600 : Theme.typo.label.weight;
                 wrap: word-wrap;
@@ -62,7 +62,7 @@ export component TopicsPanel inherits VerticalLayout {
     }
     Text {
         text: "Special Focus: Virtualization for High-Memory LLM Training";
-        color: Theme.palette.teal;
+        color: Theme.palette.lemon-green;
         font-size: Theme.typo.label.size;
         font-weight: Theme.typo.label.weight;
         letter-spacing: 0.5px;

@@ -18,8 +18,8 @@ component ScheduleEntry inherits Rectangle {
 
         // Accent bar
         Rectangle {
-            width: 2px;
-            background: is-break ? Theme.palette.shark-gray : is-keynote ? Theme.palette.teal : Theme.palette.violet;
+            width: 3px;
+            background: is-break ? Theme.palette.shark-gray : is-keynote ? Theme.palette.lemon-green : Theme.palette.slint-blue;
             border-radius: 1px;
             horizontal-stretch: 0;
         }
@@ -63,7 +63,7 @@ component ScheduleEntry inherits Rectangle {
         height: 1px;
         x: Theme.spaces.medium;
         y: parent.height - self.height;
-        background: Theme.palette.violet;
+        background: Theme.palette.slint-blue;
         opacity: 0.15;
     }
 }

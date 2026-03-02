@@ -37,7 +37,7 @@ component DateRow inherits Rectangle {
         height: 1px;
         x: Theme.spaces.medium;
         y: parent.height - self.height;
-        background: Theme.palette.violet;
+        background: Theme.palette.slint-blue;
         opacity: 0.15;
     }
 }
@@ -54,7 +54,7 @@ component InfoBlock inherits Rectangle {
 
         Text {
             text: heading;
-            color: Theme.palette.teal;
+            color: Theme.palette.lemon-green;
             font-size: Theme.typo.header.size;
             font-weight: Theme.typo.header.weight;
         }
@@ -80,7 +80,7 @@ export component SubmissionPanel inherits VerticalLayout {
 
         Text {
             text: "Important Dates";
-            color: Theme.palette.teal;
+            color: Theme.palette.lemon-green;
             font-size: Theme.typo.label.size;
             font-weight: Theme.typo.label.weight;
             letter-spacing: 0.5px;
@@ -116,7 +116,7 @@ export component SubmissionPanel inherits VerticalLayout {
 
         Rectangle {
             height: 1px;
-            background: Theme.palette.violet;
+            background: Theme.palette.slint-blue;
             opacity: 0.15;
         }
 
@@ -128,7 +128,7 @@ export component SubmissionPanel inherits VerticalLayout {
         }
     }
 
-    // Proceedings — violet accent
+    // Proceedings — slint-blue accent
     Rectangle {
         background: Theme.palette.dark-deep-blue;
         border-radius: 4px;
@@ -136,7 +136,7 @@ export component SubmissionPanel inherits VerticalLayout {
         Rectangle {
             width: 100%; height: 100%;
             border-radius: 4px;
-            background: Theme.palette.violet-gradient;
+            background: Theme.palette.slint-blue-gradient;
         }
 
         HorizontalLayout {
@@ -144,8 +144,8 @@ export component SubmissionPanel inherits VerticalLayout {
             spacing: Theme.spaces.medium;
 
             Rectangle {
-                width: 2px;
-                background: Theme.palette.violet;
+                width: 3px;
+                background: Theme.palette.lemon-green;
                 border-radius: 1px;
                 horizontal-stretch: 0;
             }
@@ -155,7 +155,7 @@ export component SubmissionPanel inherits VerticalLayout {
 
                 Text {
                     text: "Proceedings";
-                    color: Theme.palette.violet;
+                    color: Theme.palette.lemon-green;
                     font-size: Theme.typo.header.size;
                     font-weight: Theme.typo.header.weight;
                 }

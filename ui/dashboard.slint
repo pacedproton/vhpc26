@@ -9,8 +9,8 @@ component ValueCard inherits Rectangle {
 
     horizontal-stretch: 1;
     min-height: 70px;
-    border-radius: 4px;
-    background: alt-colors ? Theme.palette.violet-gradient : Theme.palette.teal-gradient;
+    border-radius: 2px;
+    background: alt-colors ? Theme.palette.slint-blue-gradient : Theme.palette.lemon-green-gradient;
 
     HorizontalLayout {
         padding-left: 15px;
@@ -21,9 +21,10 @@ component ValueCard inherits Rectangle {
 
         // Accent bar
         Rectangle {
-            width: 2px;
-            background: alt-colors ? Theme.palette.violet : Theme.palette.teal;
+            width: 3px; // slightly thicker bar
+            background: alt-colors ? Theme.palette.slint-blue : Theme.palette.lemon-green;
             horizontal-stretch: 0;
+            border-radius: 1px;
         }
 
         VerticalLayout {
@@ -32,7 +33,7 @@ component ValueCard inherits Rectangle {
 
             Text {
                 text: title;
-                color: alt-colors ? Theme.palette.violet : Theme.palette.teal;
+                color: alt-colors ? Theme.palette.slint-blue : Theme.palette.lemon-green;
                 font-size: Theme.typo.label.size;
                 font-weight: Theme.typo.label.weight;
             }
@@ -51,10 +52,11 @@ component ValueCard inherits Rectangle {
 
                 Text {
                     text: unit;
-                    color: alt-colors ? Theme.palette.violet : Theme.palette.teal;
+                    color: alt-colors ? Theme.palette.slint-blue : Theme.palette.lemon-green;
                     font-size: Theme.typo.label-light.size;
                     font-weight: Theme.typo.label-light.weight;
-                    vertical-alignment: center;
+                    vertical-alignment: bottom;
+                    padding-bottom: 4px;
                 }
             }
         }
@@ -86,7 +88,9 @@ component InfoItem inherits Rectangle {
     in property <bool> has-separator: false;
 
     background: Theme.palette.dark-deep-blue;
-    border-radius: 4px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: #ffffff0a;
 
     VerticalLayout {
         padding: Theme.spaces.medium;
@@ -100,7 +104,7 @@ component InfoItem inherits Rectangle {
         height: 1px;
         x: Theme.spaces.medium;
         y: parent.height - self.height;
-        background: Theme.palette.violet;
+        background: Theme.palette.slint-blue;
         opacity: 0.25;
     }
 }
@@ -128,7 +132,7 @@ export component DashboardPanel inherits VerticalLayout {
         Rectangle { height: 4px; }
         Text {
             text: "20th Edition  ·  Co-located with Euro-Par 2026";
-            color: Theme.palette.teal;
+            color: Theme.palette.lemon-green;
             font-size: Theme.typo.label.size;
             font-weight: Theme.typo.label.weight;
             letter-spacing: 0.5px;
@@ -176,7 +180,7 @@ export component DashboardPanel inherits VerticalLayout {
 
         Rectangle {
             height: 1px;
-            background: Theme.palette.violet;
+            background: Theme.palette.slint-blue;
             opacity: 0.25;
         }
 
@@ -194,7 +198,7 @@ export component DashboardPanel inherits VerticalLayout {
                 }
                 Text {
                     text: "Chair · Austrian Academy of Sciences";
-                    color: Theme.palette.teal;
+                    color: Theme.palette.lemon-green;
                     font-size: Theme.typo.label.size;
                     font-weight: Theme.typo.label.weight;
                 }
@@ -211,7 +215,7 @@ export component DashboardPanel inherits VerticalLayout {
                 }
                 Text {
                     text: "Co-Chair · Nubificus Ltd.";
-                    color: Theme.palette.teal;
+                    color: Theme.palette.lemon-green;
                     font-size: Theme.typo.label.size;
                     font-weight: Theme.typo.label.weight;
                 }

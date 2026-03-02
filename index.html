@@ -98,13 +98,13 @@
             text-shadow: 0 0 20px rgba(0, 229, 200, 0.4);
         }
         .loader-title span {
-            color: #3a4558;
+            color: #4b5871; /* brighter against black */
             text-shadow: none;
         }
         .loader-workshop {
-            color: #896FFF;
+            color: #a78bfc; /* brighter purple for better contrast */
             font-size: 10px;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
         }
@@ -119,13 +119,14 @@
         .iso-badge {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            width: 220px; /* fixed width for perfect column alignment */
             font-size: 10px;
             letter-spacing: 1.5px;
-            padding: 4px 8px;
+            padding: 4px 12px; /* bit more padding */
             border: 1px solid #1e2430;
             border-radius: 2px;
-            color: #5c6c80;
+            color: #72849d; /* slightly brighter text */
             background: rgba(0, 0, 0, 0.5);
             text-transform: uppercase;
         }
@@ -175,11 +176,11 @@
             display: flex;
             align-items: flex-start;
         }
-        .log-line .timestamp { color: #3a4558; margin-right: 12px; flex-shrink: 0; }
+        .log-line .timestamp { color: #5c6c80; margin-right: 12px; flex-shrink: 0; }
         .log-line .tag { color: #896FFF; margin-right: 8px; flex-shrink: 0; width: 62px;}
         .log-line .tag.ok { color: #00e5c8; }
         .log-line .tag.warn { color: #ffb86c; }
-        .log-line.active { color: #cdd6f4; }
+        .log-line.active { color: #ffffff; text-shadow: 0 0 5px rgba(255,255,255,0.4); }
         
         .cursor {
             display: inline-block;
@@ -196,7 +197,7 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-top: 10px;
+            margin-top: 20px; /* added more breathing room below terminal */
         }
         .loader-bar-track {
             flex-grow: 1;
@@ -216,7 +217,8 @@
         .progress-text {
             font-family: "JetBrains Mono", Consolas, Menlo, Monaco, monospace;
             font-size: 11px;
-            color: #00e5c8;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(0, 229, 200, 0.6);
             font-weight: 600;
             width: 48px;
             text-align: right;
@@ -234,6 +236,17 @@
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
+        }
+
+        /* Wrap canvas so it doesn't pop in weird */
+        #canvas-wrapper {
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            width: 100%;
+            height: 100%;
+        }
+        #canvas-wrapper.visible {
+            opacity: 1;
         }
     </style>
 </head>
@@ -270,7 +283,9 @@
         </div>
     </div>
 
-    <canvas id="canvas" data-slint-auto-resize-to-preferred="true" unselectable="on"></canvas>
+    <div id="canvas-wrapper">
+        <canvas id="canvas" data-slint-auto-resize-to-preferred="true" unselectable="on"></canvas>
+    </div>
 
     <script type="module">
         const bar = document.getElementById('bar-fill');
@@ -352,7 +367,12 @@
             if (c) c.style.animation = 'none', c.style.opacity = '1';
         }, 100);
 
-        await sleep(900);
+        await sleep(600);
+        
+        // Let the actual canvas fade in as the sandbox unmounts
+        document.getElementById('canvas-wrapper').classList.add('visible');
+        
+        await sleep(300);
 
         loader.classList.add('fade-out');
         setTimeout(() => loader.remove(), 1000); // Wait for the transition

@@ -1,138 +1,125 @@
 import { Theme } from "theme.slint";
 
-component SidebarItem inherits Rectangle {
+import { Theme } from "theme.slint";
+
+component TabItem inherits Rectangle {
     in property <string> label;
     in property <bool> active: false;
     callback clicked();
 
-    height: 36px;
-    background: active ? Theme.palette.teal-dim : touch.has-hover ? #ffffff08 : transparent;
-    border-radius: 4px;
+    min-width: 120px;
+    background: active ? Theme.palette.tab-gradient : transparent;
 
     touch := TouchArea {
         clicked => { root.clicked(); }
     }
 
-    HorizontalLayout {
-        padding-left: Theme.spaces.medium;
-        spacing: Theme.spaces.small;
-
-        // Active accent bar
+    VerticalLayout {
+        // Top active accent bar (Energy Monitor style)
         Rectangle {
-            width: 2px;
-            background: active ? Theme.palette.teal : transparent;
-            border-radius: 1px;
-
+            height: 2px;
+            background: active ? Theme.palette.lemon-green : transparent;
+            
             animate background { duration: Theme.durations.fast; }
         }
 
-        Text {
-            text: label;
-            color: active ? Theme.palette.teal : Theme.palette.shark-gray;
-            font-size: Theme.typo.description.size;
-            font-weight: active ? 600 : Theme.typo.description.weight;
-            vertical-alignment: center;
+        VerticalLayout {
+            alignment: center;
+            horizontal-stretch: 1;
 
-            animate color { duration: Theme.durations.fast; }
+            Text {
+                text: label;
+                color: active ? Theme.palette.lemon-green : Theme.palette.white;
+                font-size: Theme.typo.header-item.size;
+                font-weight: active ? Theme.typo.header-item.weight : Theme.typo.header-item-light.weight;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+
+                animate color { duration: Theme.durations.fast; }
+            }
         }
     }
 }
 
+// We keep the name "Sidebar" to avoid breaking main.slint immediately,
+// but structurally this is now a horizontal Header block.
 export component Sidebar inherits Rectangle {
     in property <int> active-index: 0;
     callback navigate(int);
 
-    width: 180px;
-    background: Theme.palette.sidebar-gradient;
+    height: 70px;
+    background: transparent;
 
-    // Right edge line
+    // Bottom edge line
     Rectangle {
-        x: parent.width - 1px;
-        width: 1px;
-        background: #ffffff08;
+        y: parent.height - 1px;
+        height: 1px;
+        background: #ffffff15; // faint line
     }
 
-    VerticalLayout {
-        padding: Theme.spaces.large;
-        spacing: 0px;
+    HorizontalLayout {
+        padding-left: Theme.spaces.large;
+        padding-right: Theme.spaces.large;
 
-        // Logo
-        Rectangle {
-            height: 64px;
+        // Logo section (Left)
+        HorizontalLayout {
+            alignment: start;
+            vertical-stretch: 1;
+            spacing: Theme.spaces.medium;
 
             VerticalLayout {
                 alignment: center;
-                padding-left: Theme.spaces.medium;
 
                 Text {
                     text: "VHPC";
-                    color: Theme.palette.teal;
-                    font-size: Theme.typo.value-big.size;
-                    font-weight: Theme.typo.value-big.weight;
-                    letter-spacing: 4px;
+                    color: Theme.palette.lemon-green;
+                    font-size: Theme.typo.value.size;
+                    font-weight: Theme.typo.value.weight;
+                    letter-spacing: 2px;
                 }
                 Text {
-                    text: "2026";
+                    text: "2026 // WORKSHOP";
                     color: Theme.palette.shark-gray;
-                    font-size: Theme.typo.label.size;
+                    font-size: 8px;
                     font-weight: Theme.typo.label.weight;
-                    letter-spacing: 6px;
+                    letter-spacing: 3px;
                 }
             }
         }
 
-        // Divider
-        Rectangle {
-            height: 1px;
-            background: Theme.palette.violet-dim;
-        }
-
-        Rectangle { height: Theme.spaces.large; }
-
-        SidebarItem {
-            label: "Overview";
-            active: active-index == 0;
-            clicked => { root.navigate(0); }
-        }
-        Rectangle { height: 2px; }
-        SidebarItem {
-            label: "Schedule";
-            active: active-index == 1;
-            clicked => { root.navigate(1); }
-        }
-        Rectangle { height: 2px; }
-        SidebarItem {
-            label: "Topics";
-            active: active-index == 2;
-            clicked => { root.navigate(2); }
-        }
-        Rectangle { height: 2px; }
-        SidebarItem {
-            label: "Committee";
-            active: active-index == 3;
-            clicked => { root.navigate(3); }
-        }
-        Rectangle { height: 2px; }
-        SidebarItem {
-            label: "Submission";
-            active: active-index == 4;
-            clicked => { root.navigate(4); }
-        }
-
         // Spacer
-        Rectangle { vertical-stretch: 1; }
+        Rectangle { horizontal-stretch: 1; }
 
-        Rectangle {
-            height: 1px;
-            background: Theme.palette.violet-dim;
-        }
-        Rectangle { height: Theme.spaces.small; }
-        Text {
-            text: "Euro-Par 2026";
-            color: Theme.palette.shark-gray;
-            font-size: Theme.typo.label-light.size;
-            font-weight: Theme.typo.label-light.weight;
-            horizontal-alignment: center;
+        // Tabs section (Right)
+        HorizontalLayout {
+            alignment: end;
+            spacing: 0px; // Tabs sit flush against each other
+
+            TabItem {
+                label: "Overview";
+                active: active-index == 0;
+                clicked => { root.navigate(0); }
+            }
+            TabItem {
+                label: "Schedule";
+                active: active-index == 1;
+                clicked => { root.navigate(1); }
+            }
+            TabItem {
+                label: "Topics";
+                active: active-index == 2;
+                clicked => { root.navigate(2); }
+            }
+            TabItem {
+                label: "Committee";
+                active: active-index == 3;
+                clicked => { root.navigate(3); }
+            }
+            TabItem {
+                label: "Submission";
+                active: active-index == 4;
+                clicked => { root.navigate(4); }
+            }
         }
     }
 }
