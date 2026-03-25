@@ -1,0 +1,85 @@
+21st Workshop on Virtualization with Execution Environments Management and AI at Supercomputer Scale (VHPC ’26)
+URL: https://vhpc.org
+Michael Alexander (chair), Austrian Academy of Sciences
+michael.alexander@oeaw.ac.at
+Anastassios Nanos (co-chair), Nubificus Ltd.
+ananos@nubificus.co.uk
+
+Abstract / Scope
+Virtualization and container technologies constitute the programmable substrate of modern AI and HPC infrastructures. In the current AI era – characterized by large-scale model training, distributed inference, multimodal pipelines, and increasingly agentic systems – controlled and efficient execution across heterogeneous resources is essential.
+HPC centers and cloud operators alike must manage infrastructures composed of CPUs, GPUs, NPUs, high-performance interconnects, and emerging accelerators, while supporting highly dynamic and resource-intensive AI workloads. Training jobs may span thousands of GPUs; inference services demand low latency and strict performance isolation; agentic systems orchestrate distributed tools and services across trust domains.
+Virtualization technologies provide the mechanisms to meet these demands. Full machine virtualization enables strong isolation and consolidation across heterogeneous nodes. Container-based OS-level virtualization offers lightweight and responsive deployment models suited for latency-sensitive inference and microservice-based AI pipelines. Lightweight VMs, microVMs, and unikernels reduce execution overhead and attack surface while enabling controlled multi-tenant AI platforms.
+Beyond resource isolation, controlled execution is becoming a first-class concern. Deterministic execution models, state snapshotting, replay mechanisms, and execution tracing are increasingly relevant for debugging distributed AI systems, ensuring reproducibility of training runs, and governing agentic behavior across heterogeneous infrastructure.
+I/O and accelerator virtualization enable efficient sharing of GPUs and high-speed interconnects, while network virtualization supports dynamic formation of distributed training clusters and AI execution graphs across supercomputing and hybrid cloud environments. Emerging unified memory architectures and accelerator-aware virtualization further blur traditional system boundaries.
+VHPC ’26 focuses on virtualization and controlled execution mechanisms as foundational enablers of AI at supercomputer scale. We invite contributions spanning architecture, runtime systems, performance modeling, reproducibility, memory systems, security, and tooling for large-scale AI and HPC convergence.
+
+Topics of Interest
+The VHPC program committee solicits original, high-quality submissions on virtualization and containerization technologies as foundational enablers of AI-driven HPC and cloud infrastructures. We particularly encourage contributions that address large-scale AI training, distributed inference, agentic workloads, heterogeneous accelerators, and secure multi-tenant execution.
+Each topic includes aspects of design, architecture, management, performance modeling, measurement, and tooling.
+
+1. Virtualization Architectures for AI and HPC Systems
+Container and OS-level virtualization for AI training and inference in HPC and cloud environments
+Lightweight virtual machines and microVMs for secure and low-latency AI services
+Hypervisor support for heterogeneous accelerators including GPUs, NPUs, TPUs, FPGAs
+GPU memory virtualization for high-memory LLM and foundation model training workloads, including hardware partitioning (MIG), multi-process sharing (MPS), time-slicing, and vGPU mechanisms
+Unified and flat CPU-GPU virtual memory models and accelerator address space integration
+Virtualization support for high-performance interconnects including RDMA and accelerator-aware networking
+Secure isolation models for multi-tenant and agentic AI workloads across trust domains, including hardware TEEs (AMD SEV-SNP, Intel TDX, ARM CCA) and GPU-based confidential computing
+Unikernels and specialized operating systems for minimal attack-surface AI deployment
+Lightweight sandboxed execution environments including WebAssembly (WASM/WASI) for portable and isolated AI workloads
+Virtualization extensions for emerging architectures including ARM and RISC-V in HPC-AI systems
+Energy-efficient and power-aware virtualization for large-scale AI infrastructures
+
+2. Resource Management, Orchestration, and Agentic Execution
+VM and container orchestration for distributed AI and HPC workflows
+Scheduling and placement strategies for GPU-intensive and memory-bound AI workloads, including Kubernetes Dynamic Resource Allocation (DRA) and topology-aware scheduling
+Autoscaling and event-driven resource management for training, inference, and FaaS-based AI services
+Virtualization support for serverless and function-based AI execution models
+Agentic workload orchestration across cloud, edge, and HPC infrastructures
+Secure multi-cluster and hybrid cloud-HPC integration for AI pipelines
+Workflow coupling of simulation, data analytics, and in situ AI processing in HPC environments
+Resource sharing and isolation for mixed HPC and AI production workloads
+Policy-driven control, admission, and governance for multi-tenant AI platforms
+Fault tolerance, live migration, and high-availability mechanisms for long-running AI training jobs
+
+3. Performance, Memory Systems, and Tooling for Large-Scale AI
+Performance analysis and modeling of virtualized AI workloads in supercomputing and cloud systems
+Scalability studies of containers and VMs for large-scale distributed AI training
+Distributed and disaggregated memory virtualization, including CXL-based memory pooling and fabric-attached memory for multi-node model training
+Memory-efficient techniques including compression, reduction, and out-of-core training
+Efficient GPU and accelerator memory allocation, fragmentation control, and oversubscription
+Storage and filesystem integration with virtual memory mapped approaches for AI datasets
+Deterministic and replayable execution models for distributed AI systems
+State snapshotting, time-travel debugging, and execution tracing
+Benchmarking and profiling tools for memory-intensive LLM workloads
+Measurement and mitigation of OS and virtualization noise in HPC-AI environments
+Optimization of hypervisors and virtual machine monitors for AI-centric workloads
+Case studies demonstrating virtualization-enabled AI and agentic systems in HPC and cloud infrastructures
+
+Special Focus: Virtualization and Containers for Agentic and Memory-Intensive AI Workloads
+This year, we highlight the timely topic of containers and virtualization as enabling substrates for large-scale foundation models, memory-intensive LLM training, and increasingly agentic AI systems that dynamically orchestrate tools, services, and distributed resources across cloud and HPC infrastructures.
+We invite contributions including, but not limited to, the following areas:
+Containerized and VM-based environments for large-scale training, distributed inference, and multi-agent AI systems, including orchestration frameworks such as Kubernetes
+Virtualization substrates for agentic execution graphs, tool invocation pipelines, and dynamic resource binding across heterogeneous clusters
+Advanced autoscaling, scheduling, and event-driven resource management for long-running training jobs and bursty agent-driven inference workloads
+GPU and accelerator virtualization techniques enabling safe and efficient sharing across concurrent training and agentic tasks, including MIG partitioning, MPS, and vGPU
+GPU memory virtualization and oversubscription mechanisms for high-memory LLM and foundation model workloads
+Unified CPU-GPU memory architectures, flat page tables, and shared virtual address spaces for accelerator-intensive AI pipelines
+Distributed and disaggregated memory virtualization for multi-node model training and inference, including CXL-attached and fabric-attached memory architectures
+Storage-to-memory-mapped data paths and high-throughput dataset access mechanisms for large model pipelines
+Memory compression, parameter reduction, quantization, and out-of-core techniques to reduce footprint and improve utilization
+Efficient memory allocation, fragmentation control, and runtime memory management for multi-tenant AI platforms
+Container-aware high-performance networking, including RDMA, RoCE congestion management, and scalable CNI designs for distributed AI training
+Performance isolation and mitigation of virtualization noise for latency-sensitive inference and agent coordination
+Inference serving infrastructure including GPU multiplexing, model sharding, and KV-cache management within virtualized and containerized environments
+Benchmarking, profiling, and observability tools for memory-intensive and accelerator-bound AI workloads
+Secure isolation, confidential computing (AMD SEV-SNP, Intel TDX, GPU TEEs), and trust models for multi-tenant and cross-organizational agentic systems
+Real-world case studies of virtualization-enabled LLM training, distributed inference, and agentic AI deployments across cloud and HPC environments
+
+Expected Submissions
+Approximately 20 submissions; 6 accepted for presentation.
+Proceedings published in a Springer workshop volume.
+
+Targeted Audience
+VHPC ’26 brings together researchers and practitioners in systems, virtualization, operating systems, and runtime infrastructure who are addressing the challenges of executing AI and HPC workloads on shared supercomputing and hybrid cloud platforms.
+The workshop targets experts in hypervisors, container runtimes, orchestration frameworks, accelerator virtualization, memory systems, secure execution, and reproducible distributed AI systems.

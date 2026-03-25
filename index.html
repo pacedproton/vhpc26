@@ -62,7 +62,7 @@
         }
         
         .sandbox-frame::after {
-            content: "WASM_SANDBOX_ENV // SECURE";
+            content: "WASM_SANDBOX_ENV // NATIVE EXECUTION // NO SYSCALLS";
             position: absolute;
             top: -10px;
             left: 24px;
@@ -238,12 +238,18 @@
             50% { opacity: 0; }
         }
 
-        /* Wrap canvas so it doesn't pop in weird */
+        /* Wrap canvas so it acts like a floating desktop window */
         #canvas-wrapper {
             opacity: 0;
             transition: opacity 1.2s ease;
-            width: 100%;
-            height: 100%;
+            width: 900px;
+            height: 600px;
+            max-width: 95vw;
+            max-height: 95vh;
+            border: 1px solid #1e2430;
+            border-radius: 8px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 37, 255, 0.1);
+            overflow: hidden;
         }
         #canvas-wrapper.visible {
             opacity: 1;
