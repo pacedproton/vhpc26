@@ -7,7 +7,7 @@ component TabItem inherits Rectangle {
     in property <bool> active: false;
     callback clicked();
 
-    min-width: 120px;
+    min-width: 95px;
     background: active ? Theme.palette.tab-gradient : transparent;
 
     touch := TouchArea {
@@ -93,7 +93,7 @@ export component Sidebar inherits Rectangle {
         // Tabs section (Right)
         HorizontalLayout {
             alignment: end;
-            spacing: 0px; // Tabs sit flush against each other
+            spacing: 0px;
 
             TabItem {
                 label: "Overview";
@@ -111,14 +111,24 @@ export component Sidebar inherits Rectangle {
                 clicked => { root.navigate(2); }
             }
             TabItem {
-                label: "Committee";
+                label: "TPC";
                 active: active-index == 3;
                 clicked => { root.navigate(3); }
             }
             TabItem {
-                label: "Submission";
+                label: "Dates & Sub.";
                 active: active-index == 4;
                 clicked => { root.navigate(4); }
+            }
+            TabItem {
+                label: "Publication";
+                active: active-index == 5;
+                clicked => { root.navigate(5); }
+            }
+            TabItem {
+                label: "Papers";
+                active: active-index == 6;
+                clicked => { root.navigate(6); }
             }
         }
     }

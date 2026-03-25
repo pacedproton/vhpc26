@@ -5,7 +5,6 @@ component PersonItem inherits Rectangle {
     in property <string> role;
     in property <string> affiliation;
     in property <bool> primary: false;
-    in property <bool> has-separator: false;
 
     background: Theme.palette.dark-deep-blue;
     border-radius: 4px;
@@ -16,7 +15,6 @@ component PersonItem inherits Rectangle {
         padding: Theme.spaces.medium;
         spacing: Theme.spaces.medium;
 
-        // Accent bar
         Rectangle {
             width: 3px;
             background: primary ? Theme.palette.lemon-green : Theme.palette.slint-blue;
@@ -48,31 +46,18 @@ component PersonItem inherits Rectangle {
             }
         }
     }
-
-    if has-separator : Rectangle {
-        width: parent.width - 2 * Theme.spaces.medium;
-        height: 1px;
-        x: Theme.spaces.medium;
-        y: parent.height - self.height;
-        background: Theme.palette.slint-blue;
-        opacity: 0.15;
-    }
-}
-
-component SectionTitle inherits Text {
-    in property <string> label;
-
-    text: label;
-    color: Theme.palette.white;
-    font-size: Theme.typo.header.size;
-    font-weight: Theme.typo.header.weight;
 }
 
 export component SpeakersPanel inherits VerticalLayout {
     padding: Theme.spaces.large;
     spacing: Theme.spaces.medium;
 
-    SectionTitle { label: "Workshop Committee"; }
+    Text {
+        text: "Technical Program Committee";
+        color: Theme.palette.white;
+        font-size: Theme.typo.header.size;
+        font-weight: Theme.typo.header.weight;
+    }
 
     Text {
         text: "CHAIRS";
@@ -94,31 +79,8 @@ export component SpeakersPanel inherits VerticalLayout {
         PersonItem {
             name: "Anastassios Nanos";
             role: "Co-Chair";
-            affiliation: "Nubificus Ltd.";
+            affiliation: "Nubificus Ltd., UK";
             primary: true;
-        }
-    }
-
-    Text {
-        text: "STEERING COMMITTEE";
-        color: Theme.palette.shark-gray;
-        font-size: Theme.typo.label.size;
-        font-weight: Theme.typo.label.weight;
-        letter-spacing: 1.5px;
-    }
-
-    HorizontalLayout {
-        spacing: Theme.spaces.medium;
-
-        PersonItem {
-            name: "Michael Alexander";
-            role: "Steering Committee";
-            affiliation: "Austrian Academy of Sciences";
-        }
-        PersonItem {
-            name: "Anastassios Nanos";
-            role: "Steering Committee";
-            affiliation: "Nubificus Ltd.";
         }
     }
 
@@ -133,15 +95,163 @@ export component SpeakersPanel inherits VerticalLayout {
     Rectangle {
         background: Theme.palette.dark-deep-blue;
         border-radius: 4px;
-        min-height: 40px;
 
-        Text {
-            text: "Program committee members will be announced soon.";
-            color: Theme.palette.shark-gray;
-            font-size: Theme.typo.description.size;
-            font-weight: Theme.typo.description-light.weight;
-            horizontal-alignment: center;
-            vertical-alignment: center;
+        VerticalLayout {
+            padding: Theme.spaces.medium;
+            spacing: 0px;
+
+            // Row component inlined via repeated HorizontalLayout
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Stergios Anastasiadis"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "University of Ioannina, Greece"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Gabriele Ara"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Scuola Superiore Sant'Anna, Italy"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Jakob Blomer"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "CERN, Switzerland"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Eduardo Cesar"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Universidad Autonoma de Barcelona, Spain"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Taylor Childers"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Argonne National Laboratory, USA"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Francois Diakhate"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "CEA DAM, France"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Roberto Giorgi"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "University of Siena, Italy"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Kyle Hale"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Northwestern University, USA"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Giuseppe Lettieri"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "University of Pisa, Italy"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Nikos Parlavantzas"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "IRISA, France"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Amer Qouneh"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Western New England University, USA"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Carlos Reano"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Queen's University Belfast, UK"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Riccardo Rocha"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "CERN, Switzerland"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Lutz Schubert"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "University of Ulm, Germany"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Jonathan Sparks"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Cray, USA"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Kurt Tutschku"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Blekinge Institute of Technology, Sweden"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "John Walters"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "USC ISI, USA"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Yasuhiro Watashiba"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Osaka University, Japan"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
+            Rectangle { height: 1px; background: Theme.palette.slint-blue; opacity: 0.08; }
+            HorizontalLayout {
+                padding-top: 7px; padding-bottom: 7px;
+                Rectangle { width: 3px; background: Theme.palette.slint-blue; border-radius: 1px; horizontal-stretch: 0; }
+                Rectangle { width: Theme.spaces.medium; horizontal-stretch: 0; }
+                Text { text: "Chao-Tung Yang"; color: Theme.palette.white; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+                Text { text: "Tunghai University, Taiwan"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; horizontal-stretch: 1; vertical-alignment: center; }
+            }
         }
     }
 }

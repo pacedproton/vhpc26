@@ -79,21 +79,9 @@ export component SchedulePanel inherits VerticalLayout {
         font-weight: Theme.typo.header.weight;
     }
     Text {
-        text: "Preliminary Program — Times TBC";
+        text: "To be posted in June 2026";
         color: Theme.palette.shark-gray;
         font-size: Theme.typo.label.size;
         letter-spacing: 0.5px;
     }
-
-    Rectangle { height: Theme.spaces.small; }
-
-    ScheduleEntry { time: "09:00"; title: "Opening Remarks"; detail: "Michael Alexander & Anastassios Nanos"; is-keynote: true; }
-    ScheduleEntry { time: "09:15"; title: "Keynote: GPU Memory Virtualization for LLM Training"; detail: "Speaker TBA"; is-keynote: true; }
-    ScheduleEntry { time: "10:15"; title: "Coffee Break"; is-break: true; }
-    ScheduleEntry { time: "10:45"; title: "Session 1 — Memory Management & Compression"; detail: "Paper presentations (3 × 25 min)"; }
-    ScheduleEntry { time: "12:00"; title: "Lunch Break"; is-break: true; }
-    ScheduleEntry { time: "13:30"; title: "Session 2 — Cloud-Native HPC & Virtualization"; detail: "Paper presentations (3 × 25 min)"; }
-    ScheduleEntry { time: "15:00"; title: "Coffee Break"; is-break: true; }
-    ScheduleEntry { time: "15:30"; title: "Session 3 — Panel Discussion & Open Problems"; detail: "Interactive session on future directions"; }
-    ScheduleEntry { time: "16:30"; title: "Closing Remarks"; detail: ""; has-separator: false; }
 }

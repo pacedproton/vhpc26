@@ -1,0 +1,155 @@
+import { Theme } from "theme.slint";
+
+export component PublicationPanel inherits VerticalLayout {
+    padding: Theme.spaces.large;
+    spacing: Theme.spaces.medium;
+
+    Text {
+        text: "Publication";
+        color: Theme.palette.white;
+        font-size: Theme.typo.header.size;
+        font-weight: Theme.typo.header.weight;
+    }
+    Text {
+        text: "Springer Lecture Notes in Computer Science (LNCS)";
+        color: Theme.palette.lemon-green;
+        font-size: Theme.typo.label.size;
+        font-weight: Theme.typo.label.weight;
+        letter-spacing: 0.5px;
+    }
+
+    Rectangle { height: Theme.spaces.small; }
+
+    // Proceedings highlight
+    Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        HorizontalLayout {
+            padding: Theme.spaces.medium;
+            spacing: Theme.spaces.medium;
+
+            Rectangle {
+                width: 3px;
+                background: Theme.palette.lemon-green;
+                border-radius: 1px;
+                horizontal-stretch: 0;
+            }
+
+            VerticalLayout {
+                spacing: Theme.spaces.small;
+                horizontal-stretch: 1;
+
+                Text {
+                    text: "Accepted papers will be published in the Euro-Par Workshops proceedings by Springer in the LNCS series.";
+                    color: Theme.palette.white;
+                    font-size: Theme.typo.description.size;
+                    font-weight: 600;
+                    wrap: word-wrap;
+                }
+                Text {
+                    text: "Initial submissions are in PDF. Authors of accepted papers will be requested to provide source files.";
+                    color: Theme.palette.shark-gray;
+                    font-size: Theme.typo.description.size;
+                    font-weight: Theme.typo.description.weight;
+                    wrap: word-wrap;
+                }
+            }
+        }
+    }
+
+    // Submission requirements
+    Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        VerticalLayout {
+            padding: Theme.spaces.medium;
+            spacing: Theme.spaces.medium;
+
+            Text {
+                text: "Submission Requirements";
+                color: Theme.palette.lemon-green;
+                font-size: Theme.typo.header.size;
+                font-weight: Theme.typo.header.weight;
+            }
+
+            Text {
+                text: "Papers submitted to the workshop will be reviewed by at least two members of the program committee and external reviewers.";
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.description.size;
+                font-weight: Theme.typo.description.weight;
+                wrap: word-wrap;
+            }
+
+            Text {
+                text: "Submissions should include abstract, keywords, the e-mail address of the corresponding author, and must not exceed 12 pages, including tables and figures at a main font size no smaller than 11 points.";
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.description.size;
+                font-weight: Theme.typo.description.weight;
+                wrap: word-wrap;
+            }
+
+            Text {
+                text: "Submission of a paper should be regarded as a commitment that, should the paper be accepted, at least one of the authors will register and attend the conference to present the work.";
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.description.size;
+                font-weight: Theme.typo.description.weight;
+                wrap: word-wrap;
+            }
+
+            Rectangle {
+                height: 1px;
+                background: Theme.palette.slint-blue;
+                opacity: 0.15;
+            }
+
+            HorizontalLayout {
+                spacing: Theme.spaces.large;
+
+                VerticalLayout {
+                    spacing: 3px;
+                    horizontal-stretch: 1;
+                    Text {
+                        text: "Format";
+                        color: Theme.palette.shark-gray;
+                        font-size: Theme.typo.label.size;
+                        font-weight: Theme.typo.label.weight;
+                    }
+                    Text {
+                        text: "Springer LNCS style";
+                        color: Theme.palette.white;
+                        font-size: Theme.typo.description.size;
+                        font-weight: Theme.typo.description.weight;
+                    }
+                }
+
+                VerticalLayout {
+                    spacing: 3px;
+                    horizontal-stretch: 1;
+                    Text {
+                        text: "Length";
+                        color: Theme.palette.shark-gray;
+                        font-size: Theme.typo.label.size;
+                        font-weight: Theme.typo.label.weight;
+                    }
+                    Text {
+                        text: "Up to 12 pages (incl. tables & figures)";
+                        color: Theme.palette.white;
+                        font-size: Theme.typo.description.size;
+                        font-weight: Theme.typo.description.weight;
+                        wrap: word-wrap;
+                    }
+                }
+            }
+
+            Text {
+                text: "LNCS Guidelines: springer.com/gp/computer-science/lncs/conference-proceedings-guidelines";
+                color: Theme.palette.slint-blue;
+                font-size: Theme.typo.label.size;
+                font-weight: Theme.typo.label.weight;
+                wrap: word-wrap;
+            }
+        }
+    }
+}

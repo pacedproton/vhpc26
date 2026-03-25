@@ -1,96 +1,289 @@
 import { Theme } from "theme.slint";
 
-component TopicCard inherits Rectangle {
-    in property <string> title;
-    in property <string> description;
-    in property <bool> featured: false;
-
-    background: Theme.palette.dark-deep-blue;
-    border-radius: 4px;
-    horizontal-stretch: 1;
-
-    // Featured gets gradient overlay
-    if featured : Rectangle {
-        width: 100%; height: 100%;
-        border-radius: 4px;
-        background: Theme.palette.lemon-green-gradient;
-    }
-
-    HorizontalLayout {
-        padding: Theme.spaces.medium;
-        spacing: Theme.spaces.medium;
-
-        // Accent bar
-        Rectangle {
-            width: 3px;
-            background: featured ? Theme.palette.lemon-green : Theme.palette.slint-blue;
-            border-radius: 1px;
-            horizontal-stretch: 0;
-        }
-
-        VerticalLayout {
-            horizontal-stretch: 1;
-            spacing: 4px;
-
-            Text {
-                text: title;
-                color: featured ? Theme.palette.lemon-green : Theme.palette.white;
-                font-size: featured ? Theme.typo.description.size : Theme.typo.label.size;
-                font-weight: featured ? 600 : Theme.typo.label.weight;
-                wrap: word-wrap;
-            }
-            Text {
-                text: description;
-                color: Theme.palette.shark-gray;
-                font-size: Theme.typo.label-light.size;
-                font-weight: Theme.typo.label-light.weight;
-                wrap: word-wrap;
-            }
-        }
-    }
-}
-
 export component TopicsPanel inherits VerticalLayout {
     padding: Theme.spaces.large;
     spacing: Theme.spaces.medium;
 
+    in-out property <bool> inv-open: false;
+    in-out property <bool> s1-open: false;
+    in-out property <bool> s2-open: false;
+    in-out property <bool> s3-open: false;
+
     Text {
-        text: "Call for Papers";
+        text: "Call for Papers — Topics of Interest";
         color: Theme.palette.white;
         font-size: Theme.typo.header.size;
         font-weight: Theme.typo.header.weight;
     }
     Text {
-        text: "Special Focus: Virtualization for High-Memory LLM Training";
-        color: Theme.palette.lemon-green;
+        text: "Click a section to expand · Virtualization and containerization as foundational enablers of AI-driven HPC and cloud";
+        color: Theme.palette.shark-gray;
         font-size: Theme.typo.label.size;
         font-weight: Theme.typo.label.weight;
         letter-spacing: 0.5px;
+        wrap: word-wrap;
     }
 
     Rectangle { height: Theme.spaces.small; }
 
-    TopicCard {
-        title: "GPU Memory Virtualization for LLM Training";
-        description: "Techniques for virtualizing GPU memory to support large language model training that exceeds physical memory — unified memory, memory pooling, transparent paging.";
-        featured: true;
+    // ── We Invite Contributions ─────────────────────────────────────────────
+
+    Rectangle {
+        background: inv-open ? #0d1d35 : Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+        animate background { duration: Theme.durations.fast; }
+
+        HorizontalLayout {
+            padding-left: Theme.spaces.medium;
+            padding-right: Theme.spaces.medium;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            spacing: Theme.spaces.medium;
+
+            Rectangle {
+                width: 3px;
+                background: Theme.palette.lemon-green;
+                border-radius: 1px;
+                horizontal-stretch: 0;
+            }
+
+            Text {
+                text: inv-open ? "▾  We invite contributions including, but not limited to" : "▸  We invite contributions including, but not limited to";
+                color: Theme.palette.lemon-green;
+                font-size: Theme.typo.description.size;
+                font-weight: 600;
+                vertical-alignment: center;
+                horizontal-stretch: 1;
+                wrap: word-wrap;
+            }
+        }
+
+        TouchArea { width: 100%; height: 100%; clicked => { inv-open = !inv-open; } }
     }
 
-    HorizontalLayout {
-        spacing: Theme.spaces.medium;
-        TopicCard { title: "Memory Compression"; description: "Hardware and software compression for HPC and AI workloads in virtualized environments."; }
-        TopicCard { title: "Cloud-Native HPC"; description: "Container orchestration, serverless computing, and microservices for high-performance workloads."; }
+    if inv-open : Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        VerticalLayout {
+            padding: Theme.spaces.medium;
+            spacing: 5px;
+
+            Text { text: "· Containerized and VM-based environments for large-scale training, distributed inference, and multi-agent AI systems, including orchestration frameworks such as Kubernetes"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Container-based training data ingest, RLHF/DPO load balancing, and dynamic resource shifting for iterative alignment loops"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Virtualization substrates for agentic execution graphs, tool invocation pipelines, and dynamic resource binding across heterogeneous clusters"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Advanced autoscaling, scheduling, and event-driven resource management for long-running training jobs and bursty agent-driven inference workloads"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· GPU and accelerator virtualization techniques enabling safe and efficient sharing across concurrent training and agentic tasks, including MIG partitioning, MPS, and vGPU"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· GPU memory virtualization and oversubscription mechanisms for high-memory LLM and foundation model workloads"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Unified CPU-GPU memory architectures, flat page tables, and shared virtual address spaces for accelerator-intensive AI pipelines"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Distributed and disaggregated memory virtualization for multi-node model training and inference, including CXL-attached and fabric-attached memory architectures"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Storage-to-memory-mapped data paths and high-throughput dataset access mechanisms for large model pipelines"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Memory compression, parameter reduction, quantization, and out-of-core techniques to reduce footprint and improve utilization"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Efficient memory allocation, fragmentation control, and runtime memory management for multi-tenant AI platforms"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Container-aware high-performance networking, including RDMA, RoCE congestion management, and scalable CNI designs for distributed AI training"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Performance isolation and mitigation of virtualization noise for latency-sensitive inference and agent coordination"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Inference serving infrastructure including GPU multiplexing, model sharding, and KV-cache management within virtualized and containerized environments"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Benchmarking, profiling, and observability tools for memory-intensive and accelerator-bound AI workloads"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Secure isolation, confidential computing (AMD SEV-SNP, Intel TDX, GPU TEEs), and trust models for multi-tenant and cross-organizational agentic systems"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Real-world case studies of virtualization-enabled LLM training, distributed inference, and agentic AI deployments across cloud and HPC environments"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+        }
     }
 
-    HorizontalLayout {
-        spacing: Theme.spaces.medium;
-        TopicCard { title: "VM & Container Isolation"; description: "Security and performance isolation for multi-tenant GPU sharing and HPC workloads."; }
-        TopicCard { title: "I/O & Network Virtualization"; description: "SR-IOV, RDMA, and network overlays for distributed training at scale."; }
+    // ── 1 — Virtualization Architectures ────────────────────────────────────
+
+    Rectangle {
+        background: s1-open ? #0d1d35 : Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+        animate background { duration: Theme.durations.fast; }
+
+        HorizontalLayout {
+            padding-left: Theme.spaces.medium;
+            padding-right: Theme.spaces.medium;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            spacing: Theme.spaces.medium;
+
+            Rectangle {
+                width: 3px;
+                background: Theme.palette.lemon-green;
+                border-radius: 1px;
+                horizontal-stretch: 0;
+            }
+
+            Text {
+                text: s1-open ? "▾  1 — Virtualization Architectures for AI and HPC Systems" : "▸  1 — Virtualization Architectures for AI and HPC Systems";
+                color: Theme.palette.white;
+                font-size: Theme.typo.description.size;
+                font-weight: 600;
+                vertical-alignment: center;
+                horizontal-stretch: 1;
+                wrap: word-wrap;
+            }
+
+            Text {
+                text: "11 topics";
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.label.size;
+                font-weight: Theme.typo.label.weight;
+                vertical-alignment: center;
+                horizontal-stretch: 0;
+            }
+        }
+
+        TouchArea { width: 100%; height: 100%; clicked => { s1-open = !s1-open; } }
     }
 
-    HorizontalLayout {
-        spacing: Theme.spaces.medium;
-        TopicCard { title: "Resource Scheduling"; description: "Scheduling for heterogeneous HPC clouds with GPUs, FPGAs, and accelerators."; }
-        TopicCard { title: "Performance Analysis"; description: "Benchmarking and modeling of virtualized HPC and AI infrastructure."; }
+    if s1-open : Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        VerticalLayout {
+            padding: Theme.spaces.medium;
+            spacing: 5px;
+
+            Text { text: "· Container and OS-level virtualization for AI training and inference in HPC and cloud environments"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Lightweight virtual machines and microVMs for secure and low-latency AI services"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Hypervisor support for heterogeneous accelerators including GPUs, NPUs, TPUs, FPGAs"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· GPU memory virtualization for high-memory LLM and foundation model training workloads, including hardware partitioning (MIG), multi-process sharing (MPS), time-slicing, and vGPU mechanisms"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Unified and flat CPU-GPU virtual memory models and accelerator address space integration"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Virtualization support for high-performance interconnects including RDMA and accelerator-aware networking"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Secure isolation models for multi-tenant and agentic AI workloads across trust domains, including hardware TEEs (AMD SEV-SNP, Intel TDX, ARM CCA) and GPU-based confidential computing"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Unikernels and specialized operating systems for minimal attack-surface AI deployment"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Lightweight sandboxed execution environments including WebAssembly (WASM/WASI) for portable and isolated AI workloads"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Virtualization extensions for emerging architectures including ARM and RISC-V in HPC-AI systems"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Energy-efficient and power-aware virtualization for large-scale AI infrastructures"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+        }
+    }
+
+    // ── 2 — Resource Management ──────────────────────────────────────────────
+
+    Rectangle {
+        background: s2-open ? #0d1d35 : Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+        animate background { duration: Theme.durations.fast; }
+
+        HorizontalLayout {
+            padding-left: Theme.spaces.medium;
+            padding-right: Theme.spaces.medium;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            spacing: Theme.spaces.medium;
+
+            Rectangle {
+                width: 3px;
+                background: Theme.palette.lemon-green;
+                border-radius: 1px;
+                horizontal-stretch: 0;
+            }
+
+            Text {
+                text: s2-open ? "▾  2 — Resource Management, Orchestration, and Agentic Execution" : "▸  2 — Resource Management, Orchestration, and Agentic Execution";
+                color: Theme.palette.white;
+                font-size: Theme.typo.description.size;
+                font-weight: 600;
+                vertical-alignment: center;
+                horizontal-stretch: 1;
+                wrap: word-wrap;
+            }
+
+            Text {
+                text: "10 topics";
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.label.size;
+                font-weight: Theme.typo.label.weight;
+                vertical-alignment: center;
+                horizontal-stretch: 0;
+            }
+        }
+
+        TouchArea { width: 100%; height: 100%; clicked => { s2-open = !s2-open; } }
+    }
+
+    if s2-open : Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        VerticalLayout {
+            padding: Theme.spaces.medium;
+            spacing: 5px;
+
+            Text { text: "· VM and container orchestration for distributed AI and HPC workflows"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Scheduling and placement strategies for GPU-intensive and memory-bound AI workloads, including Kubernetes Dynamic Resource Allocation (DRA) and topology-aware scheduling"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Autoscaling and event-driven resource management for training, inference, and FaaS-based AI services"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Virtualization support for serverless and function-based AI execution models"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Agentic workload orchestration across cloud, edge, and HPC infrastructures"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Secure multi-cluster and hybrid cloud-HPC integration for AI pipelines"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Workflow coupling of simulation, data analytics, and in situ AI processing in HPC environments"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Resource sharing and isolation for mixed HPC and AI production workloads"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Policy-driven control, admission, and governance for multi-tenant AI platforms"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Fault tolerance, live migration, and high-availability mechanisms for long-running AI training jobs"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+        }
+    }
+
+    // ── 3 — Performance, Memory Systems ─────────────────────────────────────
+
+    Rectangle {
+        background: s3-open ? #0d1d35 : Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+        animate background { duration: Theme.durations.fast; }
+
+        HorizontalLayout {
+            padding-left: Theme.spaces.medium;
+            padding-right: Theme.spaces.medium;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            spacing: Theme.spaces.medium;
+
+            Rectangle {
+                width: 3px;
+                background: Theme.palette.lemon-green;
+                border-radius: 1px;
+                horizontal-stretch: 0;
+            }
+
+            Text {
+                text: s3-open ? "▾  3 — Performance, Memory Systems, and Tooling for Large-Scale AI" : "▸  3 — Performance, Memory Systems, and Tooling for Large-Scale AI";
+                color: Theme.palette.white;
+                font-size: Theme.typo.description.size;
+                font-weight: 600;
+                vertical-alignment: center;
+                horizontal-stretch: 1;
+                wrap: word-wrap;
+            }
+
+            Text {
+                text: "12 topics";
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.label.size;
+                font-weight: Theme.typo.label.weight;
+                vertical-alignment: center;
+                horizontal-stretch: 0;
+            }
+        }
+
+        TouchArea { width: 100%; height: 100%; clicked => { s3-open = !s3-open; } }
+    }
+
+    if s3-open : Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        VerticalLayout {
+            padding: Theme.spaces.medium;
+            spacing: 5px;
+
+            Text { text: "· Performance analysis and modeling of virtualized AI workloads in supercomputing and cloud systems"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Scalability studies of containers and VMs for large-scale distributed AI training"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Distributed and disaggregated memory virtualization, including CXL-based memory pooling and fabric-attached memory for multi-node model training"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Memory-efficient techniques including compression, reduction, and out-of-core training"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Efficient GPU and accelerator memory allocation, fragmentation control, and oversubscription"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Storage and filesystem integration with virtual memory mapped approaches for AI datasets"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Deterministic and replayable execution models for distributed AI systems"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· State snapshotting, time-travel debugging, and execution tracing"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Benchmarking and profiling tools for memory-intensive LLM workloads"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Measurement and mitigation of OS and virtualization noise in HPC-AI environments"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Optimization of hypervisors and virtual machine monitors for AI-centric workloads"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+            Text { text: "· Case studies demonstrating virtualization-enabled AI and agentic systems in HPC and cloud infrastructures"; color: Theme.palette.shark-gray; font-size: Theme.typo.description.size; font-weight: Theme.typo.description.weight; wrap: word-wrap; }
+        }
     }
 }

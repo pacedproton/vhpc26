@@ -1,0 +1,148 @@
+import { Theme } from "theme.slint";
+
+export component PapersPanel inherits VerticalLayout {
+    padding: Theme.spaces.large;
+    spacing: Theme.spaces.medium;
+
+    Text {
+        text: "Papers & Lightning Talks";
+        color: Theme.palette.white;
+        font-size: Theme.typo.header.size;
+        font-weight: Theme.typo.header.weight;
+    }
+    Text {
+        text: "Workshop format — August 24–25, 2026";
+        color: Theme.palette.lemon-green;
+        font-size: Theme.typo.label.size;
+        font-weight: Theme.typo.label.weight;
+        letter-spacing: 0.5px;
+    }
+
+    Rectangle { height: Theme.spaces.small; }
+
+    Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        VerticalLayout {
+            padding: Theme.spaces.medium;
+            spacing: Theme.spaces.medium;
+
+            Text {
+                text: "Paper Presentations";
+                color: Theme.palette.lemon-green;
+                font-size: Theme.typo.header.size;
+                font-weight: Theme.typo.header.weight;
+            }
+
+            Text {
+                text: "The workshop is one day in length, composed of 20-minute paper presentations each followed by 10-minute discussion sections. Presentations may be accompanied by interactive demonstrations.";
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.description.size;
+                font-weight: Theme.typo.description.weight;
+                wrap: word-wrap;
+            }
+
+            Rectangle {
+                height: 1px;
+                background: Theme.palette.slint-blue;
+                opacity: 0.15;
+            }
+
+            Text {
+                text: "Format: 20 min presentation + 10 min discussion";
+                color: Theme.palette.white;
+                font-size: Theme.typo.description.size;
+                font-weight: Theme.typo.description.weight;
+            }
+        }
+    }
+
+    Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        Rectangle {
+            width: 100%; height: 100%;
+            border-radius: 4px;
+            background: Theme.palette.slint-blue-gradient;
+        }
+
+        HorizontalLayout {
+            padding: Theme.spaces.medium;
+            spacing: Theme.spaces.medium;
+
+            Rectangle {
+                width: 3px;
+                background: Theme.palette.slint-blue;
+                border-radius: 1px;
+                horizontal-stretch: 0;
+            }
+
+            VerticalLayout {
+                spacing: Theme.spaces.small;
+
+                Text {
+                    text: "Lightning Talks";
+                    color: Theme.palette.lemon-green;
+                    font-size: Theme.typo.header.size;
+                    font-weight: Theme.typo.header.weight;
+                }
+
+                Text {
+                    text: "Lightning Talks are in a non-paper track, synoptical in nature and are strictly limited to 5 minutes. They can be used to gain early feedback on ongoing research, for demonstrations, to present research results, early research ideas, perspectives and positions of interest to the community.";
+                    color: Theme.palette.shark-gray;
+                    font-size: Theme.typo.description.size;
+                    font-weight: Theme.typo.description.weight;
+                    wrap: word-wrap;
+                }
+
+                Text {
+                    text: "Submit lightning talk abstracts via the main submission link: edas.info/newPaper.php?c=35100";
+                    color: Theme.palette.white;
+                    font-size: Theme.typo.description.size;
+                    font-weight: Theme.typo.description.weight;
+                    wrap: word-wrap;
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        background: Theme.palette.dark-deep-blue;
+        border-radius: 4px;
+
+        VerticalLayout {
+            padding: Theme.spaces.medium;
+            spacing: Theme.spaces.medium;
+
+            Text {
+                text: "General Information";
+                color: Theme.palette.lemon-green;
+                font-size: Theme.typo.header.size;
+                font-weight: Theme.typo.header.weight;
+            }
+
+            Text {
+                text: "The workshop will be held in conjunction with the International European Conference on Parallel and Distributed Computing (Euro-Par) on August 24–28, 2026, Pisa, Italy. Please contact ahead of time for presenting remotely via video.";
+                color: Theme.palette.shark-gray;
+                font-size: Theme.typo.description.size;
+                font-weight: Theme.typo.description.weight;
+                wrap: word-wrap;
+            }
+
+            Rectangle {
+                height: 1px;
+                background: Theme.palette.slint-blue;
+                opacity: 0.15;
+            }
+
+            Text {
+                text: "Follow VHPC on Bluesky: bsky.app/profile/vhpc.bsky.social";
+                color: Theme.palette.slint-blue;
+                font-size: Theme.typo.label.size;
+                font-weight: Theme.typo.label.weight;
+            }
+        }
+    }
+}

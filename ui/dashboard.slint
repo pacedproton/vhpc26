@@ -118,7 +118,7 @@ export component DashboardPanel inherits VerticalLayout {
         spacing: 2px;
 
         Text {
-            text: "Workshop on Virtualization in";
+            text: "21st Workshop on Virtualization in";
             color: Theme.palette.shark-gray;
             font-size: Theme.typo.header-item.size;
             font-weight: Theme.typo.header-item-light.weight;
@@ -131,7 +131,7 @@ export component DashboardPanel inherits VerticalLayout {
         }
         Rectangle { height: 4px; }
         Text {
-            text: "20th Edition  ·  Co-located with Euro-Par 2026";
+            text: "21st Edition  ·  Co-located with Euro-Par 2026  ·  vhpc.org";
             color: Theme.palette.lemon-green;
             font-size: Theme.typo.label.size;
             font-weight: Theme.typo.label.weight;
@@ -145,33 +145,57 @@ export component DashboardPanel inherits VerticalLayout {
 
         ValueCard {
             title: "Edition";
-            value: "20th";
+            value: "21st";
             unit: "year";
         }
         ValueCard {
             title: "Focus";
-            value: "LLM";
-            unit: "memory";
+            value: "AI";
+            unit: "+ HPC";
             alt-colors: true;
         }
         ValueCard {
-            title: "Format";
-            value: "Hybrid";
-            unit: "";
+            title: "Venue";
+            value: "Pisa";
+            unit: "Italy";
         }
     }
 
     // About — Item style
     InfoItem {
         Text {
-            text: "About VHPC";
+            text: "About VHPC '26";
             color: Theme.palette.white;
             font-size: Theme.typo.header.size;
             font-weight: Theme.typo.header.weight;
         }
 
         Text {
-            text: "VHPC brings together researchers and practitioners to discuss virtualization techniques for high-performance cloud computing. This year's 20th edition focuses on virtualization in support of high-memory LLM training workloads, including GPU memory virtualization, memory compression, and cloud-native HPC.";
+            text: "This year, we highlight containers and virtualization as enabling substrates for scaled large language models, memory-intensive LLM training, and increasingly agentic AI systems that dynamically orchestrate tools, services, and distributed resources across cloud and HPC infrastructures.";
+            color: Theme.palette.white;
+            font-size: Theme.typo.description.size;
+            font-weight: Theme.typo.description.weight;
+            wrap: word-wrap;
+        }
+
+        Text {
+            text: "The Workshop on Virtualization in High-Performance Cloud Computing (VHPC) aims to bring together researchers and industrial practitioners facing the challenges posed by virtualization and containerization in AI-driven HPC and cloud infrastructures, in order to foster discussion, collaboration, mutual exchange of knowledge and experience, enabling research to ultimately provide novel solutions for virtualized computing systems of tomorrow.";
+            color: Theme.palette.shark-gray;
+            font-size: Theme.typo.description.size;
+            font-weight: Theme.typo.description.weight;
+            wrap: word-wrap;
+        }
+
+        Text {
+            text: "Virtualization and container technologies constitute the programmable substrate of modern AI and HPC infrastructures. In the current AI era — characterized by large-scale model training, distributed inference, multimodal pipelines, and increasingly agentic systems — controlled and efficient execution across heterogeneous resources is essential. HPC centers and cloud operators must manage infrastructures composed of CPUs, GPUs, NPUs, high-performance interconnects, and emerging accelerators, while supporting highly dynamic and resource-intensive AI workloads.";
+            color: Theme.palette.shark-gray;
+            font-size: Theme.typo.description.size;
+            font-weight: Theme.typo.description.weight;
+            wrap: word-wrap;
+        }
+
+        Text {
+            text: "Beyond resource isolation, controlled execution is a first-class concern. Deterministic execution models, state snapshotting, replay mechanisms, and execution tracing are increasingly relevant for debugging distributed AI systems, ensuring reproducibility of training runs, and governing agentic behavior across heterogeneous infrastructure.";
             color: Theme.palette.shark-gray;
             font-size: Theme.typo.description.size;
             font-weight: Theme.typo.description.weight;
@@ -219,6 +243,30 @@ export component DashboardPanel inherits VerticalLayout {
                     font-size: Theme.typo.label.size;
                     font-weight: Theme.typo.label.weight;
                 }
+            }
+        }
+
+        Rectangle {
+            height: 1px;
+            background: Theme.palette.slint-blue;
+            opacity: 0.15;
+        }
+
+        HorizontalLayout {
+            spacing: Theme.spaces.large;
+
+            Text {
+                text: "Full CfP (text):  cfp/cfp.text";
+                color: Theme.palette.slint-blue;
+                font-size: Theme.typo.label.size;
+                font-weight: Theme.typo.label.weight;
+            }
+
+            Text {
+                text: "Bluesky: @vhpc.bsky.social";
+                color: Theme.palette.slint-blue;
+                font-size: Theme.typo.label.size;
+                font-weight: Theme.typo.label.weight;
             }
         }
     }

@@ -68,7 +68,7 @@ export component SubmissionPanel inherits VerticalLayout {
     spacing: Theme.spaces.medium;
 
     Text {
-        text: "Paper Submission";
+        text: "Dates & Submission";
         color: Theme.palette.white;
         font-size: Theme.typo.header.size;
         font-weight: Theme.typo.header.weight;
@@ -94,11 +94,23 @@ export component SubmissionPanel inherits VerticalLayout {
             clip: true;
 
             VerticalLayout {
-                DateRow { label: "Submission"; value: "TBA"; }
-                DateRow { label: "Notification"; value: "TBA"; }
-                DateRow { label: "Camera-Ready"; value: "TBA"; }
-                DateRow { label: "Workshop"; value: "August 2026 (with Euro-Par)"; has-separator: false; }
+                DateRow { label: "Submission"; value: "May 16, 2026  23:59 AoE  (rolling abstract)"; }
+                DateRow { label: "Notification"; value: "June 12, 2026"; }
+                DateRow { label: "Camera-Ready"; value: "July 10, 2026"; }
+                DateRow { label: "Workshop"; value: "August 24–25, 2026 · Pisa, Italy"; has-separator: false; }
             }
+        }
+    }
+
+    InfoBlock {
+        heading: "Who Should Submit";
+
+        Text {
+            text: "VHPC targets systems researchers, virtualization engineers, and OS/runtime experts addressing AI+HPC convergence. Approximately 20 submissions expected; 6 papers accepted for presentation (competitive single-blind peer review).";
+            color: Theme.palette.shark-gray;
+            font-size: Theme.typo.description.size;
+            font-weight: Theme.typo.description.weight;
+            wrap: word-wrap;
         }
     }
 
@@ -121,7 +133,7 @@ export component SubmissionPanel inherits VerticalLayout {
         }
 
         Text {
-            text: "Submission system: EasyChair (link TBA)";
+            text: "Submit via EDAS: edas.info/newPaper.php?c=35100";
             color: Theme.palette.white;
             font-size: Theme.typo.description.size;
             font-weight: Theme.typo.description.weight;
