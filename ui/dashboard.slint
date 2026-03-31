@@ -1,4 +1,5 @@
 import { Theme } from "theme.slint";
+import { AppLinks } from "applinks.slint";
 
 // Energy Monitor style ValueDisplay — accent bar + gradient bg + title/value/unit
 component ValueCard inherits Rectangle {
@@ -118,13 +119,13 @@ export component DashboardPanel inherits VerticalLayout {
         spacing: 2px;
 
         Text {
-            text: "21st Workshop on Virtualization in";
+            text: "21st Workshop on Virtualization, Containers, and";
             color: Theme.palette.shark-gray;
             font-size: Theme.typo.header-item.size;
             font-weight: Theme.typo.header-item-light.weight;
         }
         Text {
-            text: "High-Performance Cloud Computing";
+            text: "Resource Isolation for Supercomputer AI";
             color: Theme.palette.white;
             font-size: Theme.typo.header-item.size;
             font-weight: Theme.typo.header-item.weight;
@@ -179,7 +180,7 @@ export component DashboardPanel inherits VerticalLayout {
         }
 
         Text {
-            text: "The Workshop on Virtualization in High-Performance Cloud Computing (VHPC) aims to bring together researchers and industrial practitioners facing the challenges posed by virtualization and containerization in AI-driven HPC and cloud infrastructures, in order to foster discussion, collaboration, mutual exchange of knowledge and experience, enabling research to ultimately provide novel solutions for virtualized computing systems of tomorrow.";
+            text: "The Workshop on Virtualization, Containers, and Resource Isolation for Supercomputer AI (VHPC) aims to bring together researchers and industrial practitioners facing the challenges posed by virtualization and containerization in AI-driven HPC and cloud infrastructures, in order to foster discussion, collaboration, mutual exchange of knowledge and experience, enabling research to ultimately provide novel solutions for virtualized computing systems of tomorrow.";
             color: Theme.palette.shark-gray;
             font-size: Theme.typo.description.size;
             font-weight: Theme.typo.description.weight;
@@ -253,20 +254,58 @@ export component DashboardPanel inherits VerticalLayout {
         }
 
         HorizontalLayout {
-            spacing: Theme.spaces.large;
+            spacing: Theme.spaces.medium;
 
-            Text {
-                text: "Full CfP (text):  cfp/cfp.text";
-                color: Theme.palette.slint-blue;
-                font-size: Theme.typo.label.size;
-                font-weight: Theme.typo.label.weight;
+            Rectangle {
+                background: #0025ff18;
+                border-radius: 2px;
+                horizontal-stretch: 1;
+
+                HorizontalLayout {
+                    padding-top: 7px;
+                    padding-bottom: 7px;
+                    padding-left: Theme.spaces.medium;
+                    padding-right: Theme.spaces.medium;
+
+                    Text {
+                        text: "↗  Full CfP: cfp/cfp.text";
+                        color: Theme.palette.slint-blue;
+                        font-size: Theme.typo.label.size;
+                        font-weight: 600;
+                        vertical-alignment: center;
+                        horizontal-stretch: 1;
+                    }
+                }
+
+                TouchArea {
+                    clicked => { AppLinks.open-url("cfp/cfp.text"); }
+                }
             }
 
-            Text {
-                text: "Bluesky: @vhpc.bsky.social";
-                color: Theme.palette.slint-blue;
-                font-size: Theme.typo.label.size;
-                font-weight: Theme.typo.label.weight;
+            Rectangle {
+                background: #0025ff18;
+                border-radius: 2px;
+                horizontal-stretch: 1;
+
+                HorizontalLayout {
+                    padding-top: 7px;
+                    padding-bottom: 7px;
+                    padding-left: Theme.spaces.medium;
+                    padding-right: Theme.spaces.medium;
+
+                    Text {
+                        text: "↗  Bluesky: @vhpc.bsky.social";
+                        color: Theme.palette.slint-blue;
+                        font-size: Theme.typo.label.size;
+                        font-weight: 600;
+                        vertical-alignment: center;
+                        horizontal-stretch: 1;
+                    }
+                }
+
+                TouchArea {
+                    clicked => { AppLinks.open-url("https://bsky.app/profile/vhpc.bsky.social"); }
+                }
             }
         }
     }
