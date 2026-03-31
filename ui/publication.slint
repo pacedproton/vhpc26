@@ -1,4 +1,5 @@
 import { Theme } from "theme.slint";
+import { AppLinks } from "applinks.slint";
 
 export component PublicationPanel inherits VerticalLayout {
     padding: Theme.spaces.large;
@@ -143,12 +144,30 @@ export component PublicationPanel inherits VerticalLayout {
                 }
             }
 
-            Text {
-                text: "LNCS Guidelines: springer.com/gp/computer-science/lncs/conference-proceedings-guidelines";
-                color: Theme.palette.slint-blue;
-                font-size: Theme.typo.label.size;
-                font-weight: Theme.typo.label.weight;
-                wrap: word-wrap;
+            Rectangle {
+                background: #0025ff18;
+                border-radius: 2px;
+
+                HorizontalLayout {
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                    padding-left: Theme.spaces.medium;
+                    padding-right: Theme.spaces.medium;
+
+                    Text {
+                        text: "↗  LNCS Guidelines: springer.com/gp/computer-science/lncs/conference-proceedings-guidelines";
+                        color: Theme.palette.slint-blue;
+                        font-size: Theme.typo.label.size;
+                        font-weight: 600;
+                        horizontal-stretch: 1;
+                        wrap: word-wrap;
+                        vertical-alignment: center;
+                    }
+                }
+
+                TouchArea {
+                    clicked => { AppLinks.open-url("https://www.springer.com/gp/computer-science/lncs/conference-proceedings-guidelines"); }
+                }
             }
         }
     }

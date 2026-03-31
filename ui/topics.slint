@@ -1,4 +1,5 @@
 import { Theme } from "theme.slint";
+import { AppLinks } from "applinks.slint";
 
 export component TopicsPanel inherits VerticalLayout {
     padding: Theme.spaces.large;
@@ -111,7 +112,7 @@ export component TopicsPanel inherits VerticalLayout {
             }
 
             Text {
-                text: s1-open ? "▾  1 — Virtualization Architectures for AI and HPC Systems" : "▸  1 — Virtualization Architectures for AI and HPC Systems";
+                text: s1-open ? "▾  1: Virtualization Architectures for AI and HPC Systems" : "▸  1: Virtualization Architectures for AI and HPC Systems";
                 color: Theme.palette.white;
                 font-size: Theme.typo.description.size;
                 font-weight: 600;
@@ -177,7 +178,7 @@ export component TopicsPanel inherits VerticalLayout {
             }
 
             Text {
-                text: s2-open ? "▾  2 — Resource Management, Orchestration, and Agentic Execution" : "▸  2 — Resource Management, Orchestration, and Agentic Execution";
+                text: s2-open ? "▾  2: Resource Management, Orchestration, and Agentic Execution" : "▸  2: Resource Management, Orchestration, and Agentic Execution";
                 color: Theme.palette.white;
                 font-size: Theme.typo.description.size;
                 font-weight: 600;
@@ -242,7 +243,7 @@ export component TopicsPanel inherits VerticalLayout {
             }
 
             Text {
-                text: s3-open ? "▾  3 — Performance, Memory Systems, and Tooling for Large-Scale AI" : "▸  3 — Performance, Memory Systems, and Tooling for Large-Scale AI";
+                text: s3-open ? "▾  3: Performance, Memory Systems, and Tooling for Large-Scale AI" : "▸  3: Performance, Memory Systems, and Tooling for Large-Scale AI";
                 color: Theme.palette.white;
                 font-size: Theme.typo.description.size;
                 font-weight: 600;

@@ -1,10 +1,11 @@
 ==========================================================
 CALL FOR PAPERS
 
-21st Workshop on Virtualization in High-Performance Cloud Computing
-(VHPC '26) held in conjunction with the European Conference on
+21st Workshop on Virtualization, Containers, and
+Resource Isoluation for Supercomputer AI (VHPC '26)
+
+held in conjunction with the European Conference on
 Parallel and Distributed Computing Aug 24-28, 2026, Pisa, Italy.
-(Springer LNCS Proceedings)
 
 ==========================================================
 
@@ -19,8 +20,8 @@ in the Call for Papers (CfP) announcement at the end of this message.
 
 Call for Papers
 
-This year, we highlight containers and virtualization as enabling
-substrates for scaled large language models, memory-intensive LLM
+This year, we highlight containers and virtualization as sandbox
+enablers for scaled large language models, memory-intensive LLM
 training, and increasingly agentic AI systems that dynamically
 orchestrate tools, services, and distributed resources across cloud
 and HPC infrastructures.
@@ -72,7 +73,6 @@ We invite contributions including, but not limited to:
   and HPC environments
 
  
-
 The Workshop on Virtualization in High-Performance Cloud Computing
 (VHPC) aims to bring together researchers and industrial practitioners
 facing the challenges posed by virtualization and containerization
@@ -288,13 +288,9 @@ Pisa, Italy.
 
 Please contact ahead of time for presenting remotely via video.
 
- 
-
 Abstract, Paper Submission Link: https://edas.info/newPaper.php?c=35100
-
- 
 
 LNCS Format Guidelines: https://www.springer.com/gp/computer-science/lncs/conference-proceedings-guidelines
 
+Follow VHPC Updates: https://x.com/VHPCworkshop https://bsky.app/profile/vhpc.bsky.social 
 
-Follow VHPC Updates on Bluesky: https://bsky.app/profile/vhpc.bsky.social

@@ -1,0 +1,4 @@
+// Global callback wired to window.open() in lib.rs for WASM link handling
+export global AppLinks {
+    callback open-url(string);
+}
