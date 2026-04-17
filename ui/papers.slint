@@ -131,29 +131,61 @@ export component PapersPanel inherits VerticalLayout {
                 opacity: 0.15;
             }
 
-            Rectangle {
-                background: #0025ff18;
-                border-radius: 2px;
+            HorizontalLayout {
+                spacing: Theme.spaces.medium;
 
-                HorizontalLayout {
-                    padding-top: 8px;
-                    padding-bottom: 8px;
-                    padding-left: Theme.spaces.medium;
-                    padding-right: Theme.spaces.medium;
+                Rectangle {
+                    background: #0025ff18;
+                    border-radius: 2px;
+                    horizontal-stretch: 1;
 
-                    Text {
-                        text: "↗  Follow VHPC on Bluesky: bsky.app/profile/vhpc.bsky.social";
-                        color: Theme.palette.slint-blue;
-                        font-size: Theme.typo.label.size;
-                        font-weight: 600;
-                        horizontal-stretch: 1;
-                        wrap: word-wrap;
-                        vertical-alignment: center;
+                    HorizontalLayout {
+                        padding-top: 8px;
+                        padding-bottom: 8px;
+                        padding-left: Theme.spaces.medium;
+                        padding-right: Theme.spaces.medium;
+
+                        Text {
+                            text: "↗  Bluesky: @vhpc.bsky.social";
+                            color: Theme.palette.slint-blue;
+                            font-size: Theme.typo.label.size;
+                            font-weight: 600;
+                            horizontal-stretch: 1;
+                            wrap: word-wrap;
+                            vertical-alignment: center;
+                        }
+                    }
+
+                    TouchArea {
+                        clicked => { AppLinks.open-url("https://bsky.app/profile/vhpc.bsky.social"); }
                     }
                 }
 
-                TouchArea {
-                    clicked => { AppLinks.open-url("https://bsky.app/profile/vhpc.bsky.social"); }
+                Rectangle {
+                    background: #0025ff18;
+                    border-radius: 2px;
+                    horizontal-stretch: 1;
+
+                    HorizontalLayout {
+                        padding-top: 8px;
+                        padding-bottom: 8px;
+                        padding-left: Theme.spaces.medium;
+                        padding-right: Theme.spaces.medium;
+
+                        Text {
+                            text: "↗  X: @VHPCworkshop";
+                            color: Theme.palette.slint-blue;
+                            font-size: Theme.typo.label.size;
+                            font-weight: 600;
+                            horizontal-stretch: 1;
+                            wrap: word-wrap;
+                            vertical-alignment: center;
+                        }
+                    }
+
+                    TouchArea {
+                        clicked => { AppLinks.open-url("https://x.com/VHPCworkshop"); }
+                    }
                 }
             }
         }
