@@ -1,0 +1,13 @@
+*
+!Cargo.toml
+!Cargo.lock
+!build.rs
+!src/
+!ui/
+!index.html
+!loader.js
+!loader.css
+!deploy/nginx.conf
+!deploy/security-headers.conf
+!cfp/cfp.text
+**/._*

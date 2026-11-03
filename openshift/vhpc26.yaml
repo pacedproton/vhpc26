@@ -1,0 +1,145 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vhpc26
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: vhpc26-web
+  namespace: vhpc26
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: vhpc26-web
+  namespace: vhpc26
+spec:
+  source:
+    type: Binary
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: vhpc26-web:latest
+  resources:
+    limits:
+      memory: 6Gi
+  runPolicy: Serial
+  successfulBuildsHistoryLimit: 3
+  failedBuildsHistoryLimit: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vhpc26-web
+  namespace: vhpc26
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"vhpc26-web:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"web\")].image"}]
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: vhpc26-web
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: vhpc26-web
+    spec:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: web
+          image: image-registry.openshift-image-registry.svc:5000/vhpc26/vhpc26-web:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          resources:
+            requests: { cpu: 10m, memory: 32Mi }
+            limits: { memory: 128Mi }
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 32Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vhpc26-web
+  namespace: vhpc26
+spec:
+  selector:
+    app: vhpc26-web
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+# Default-deny ingress; only the Cloudflare tunnel may reach the pods.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-cloudflared-only
+  namespace: vhpc26
+spec:
+  # Scoped to the web pods only: build pods need egress (API server, crates.io).
+  podSelector:
+    matchLabels:
+      app: vhpc26-web
+  policyTypes: ["Ingress", "Egress"]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: cloudflared
+      ports:
+        - port: 8080
+          protocol: TCP
+  egress: []   # static site: no outbound traffic at all
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: vhpc26-web
+  namespace: vhpc26
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: vhpc26-web

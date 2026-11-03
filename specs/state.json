@@ -1,0 +1,72 @@
+{
+  "project": "vhpc26",
+  "env": {
+    "build_cmd": "cargo build --locked --release --lib --target wasm32-unknown-unknown",
+    "test_cmd": "cargo test -- --test-threads=1"
+  },
+  "items": [
+    {
+      "id": "SEC-001",
+      "scope": "Cargo.lock",
+      "title": "No known-vulnerable crates (RustSec) in dependency tree",
+      "oracle_type": "artifact",
+      "oracle_cmd": "cargo audit --deny unsound --deny yanked -q",
+      "status": "VERIFIED",
+      "verified_at": "2026-11-03"
+    },
+    {
+      "id": "SEC-002",
+      "scope": "src/lib.rs",
+      "title": "open_url only opens https allowlisted hosts; rejects javascript:/data:/userinfo/port tricks (+ tests/links_test.rs: every ui/*.slint link passes the allowlist)",
+      "oracle_type": "unit",
+      "oracle_cmd": "cargo test --locked -- --test-threads=1",
+      "status": "VERIFIED",
+      "verified_at": "2026-11-03"
+    },
+    {
+      "id": "SEC-003",
+      "scope": "index.html, loader.js",
+      "title": "No inline script/style, no third-party scripts (dead GA UA tag removed), no innerHTML",
+      "oracle_type": "ast+state",
+      "oracle_cmd": "! grep -qE '<script(>| type=\"module\">)|<style|googletagmanager' index.html && ! grep -q innerHTML loader.js",
+      "status": "VERIFIED",
+      "verified_at": "2026-11-03"
+    },
+    {
+      "id": "SEC-004",
+      "scope": "deploy/nginx.conf",
+      "title": "Served site: strict CSP, HSTS, nosniff, XFO, COOP, GET/HEAD only, file allowlist, wasm MIME, gzip",
+      "oracle_type": "integration",
+      "oracle_cmd": "deploy/verify.sh http://127.0.0.1:18080  # via: ssh -L 18080:127.0.0.1:18080 root@one oc -n vhpc26 port-forward svc/vhpc26-web 18080:80",
+      "status": "VERIFIED",
+      "verified_at": "2026-11-03"
+    },
+    {
+      "id": "SEC-005",
+      "scope": "browser",
+      "title": "App boots and renders under the production CSP with zero CSP violations / page errors",
+      "oracle_type": "integration",
+      "oracle_cmd": "node deploy/browser-check.mjs http://127.0.0.1:18080",
+      "status": "VERIFIED",
+      "verified_at": "2026-11-03"
+    },
+    {
+      "id": "DEP-001",
+      "scope": "openshift/vhpc26.yaml (Argo CD app vhpc26)",
+      "title": "Deployed on OCP ns vhpc26: restricted PSA, non-root, RO rootfs, caps dropped, NetworkPolicy cloudflared-only, 2 replicas ready",
+      "oracle_type": "integration",
+      "oracle_cmd": "ssh -i ~/.ssh/id_ed25519-20240331 root@one 'oc -n vhpc26 rollout status deploy/vhpc26-web --timeout=60s'",
+      "status": "VERIFIED",
+      "verified_at": "2026-11-03"
+    },
+    {
+      "id": "DEP-002",
+      "scope": "cloudflared (remote-managed tunnel)",
+      "title": "Public hostname routed to http://vhpc26-web.vhpc26.svc:80 in Cloudflare Zero Trust",
+      "oracle_type": "integration",
+      "oracle_cmd": "deploy/verify.sh https://<public-hostname>",
+      "status": "OPEN",
+      "verified_at": null
+    }
+  ]
+}

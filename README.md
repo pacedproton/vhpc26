@@ -53,9 +53,23 @@ Open [http://localhost:8000](http://localhost:8000).
 
 After any rebuild, hard-refresh (`Cmd+Shift+R`) to bypass browser cache.
 
-## Deploy
+## Deploy (OpenShift)
 
-Copy `index.html` and the entire `pkg/` directory to your web server. Both must be served from the same origin.
+Production runs on OCP (namespace `vhpc26`) behind the Cloudflare tunnel. The
+`Dockerfile` builds the WASM from source and serves it with unprivileged nginx
+(`deploy/nginx.conf`: strict CSP, HSTS, file allowlist, GET/HEAD only).
+
+```bash
+oc apply -f deploy/argocd-application.yaml   # Argo CD syncs openshift/ (ns, BuildConfig, Deployment, Service, NetworkPolicy, PDB) from main
+oc -n vhpc26 start-build vhpc26-web --from-dir=. --follow   # run from a clean checkout (COPYFILE_DISABLE=1 when tarring from macOS)
+```
+
+The image-change trigger rolls the Deployment automatically. Verify with
+`deploy/verify.sh <url>` (headers/serving) and `node deploy/browser-check.mjs <url>`
+(app boots under the CSP). Cloudflare ingress: `http://vhpc26-web.vhpc26.svc:80`.
+
+Any new external link in `ui/*.slint` must be added to `ALLOWED_HOSTS` in
+`src/lib.rs` (`tests/links_test.rs` enforces this).
 
 ## Project Structure
 

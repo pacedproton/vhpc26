@@ -1,0 +1,36 @@
+# Argo CD Application (openshift-gitops). Apply once:
+#   oc apply -f deploy/argocd-application.yaml
+# Argo then syncs openshift/ from main. Images are built by the BuildConfig
+# (oc -n vhpc26 start-build vhpc26-web --from-dir=.) and rolled out by the
+# ImageStream trigger, so the Deployment's image field is ignored by Argo.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vhpc26
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/pacedproton/vhpc26.git
+    path: openshift
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vhpc26
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jqPathExpressions:
+        - '.spec.template.metadata.annotations["kubectl.kubernetes.io/restartedAt"]'
+        - '.spec.template.spec.containers[] | select(.name == "web") | .image'
+    - group: build.openshift.io
+      kind: BuildConfig
+      jsonPointers:
+        - /spec/triggers
